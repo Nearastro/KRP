@@ -19,11 +19,11 @@
                 extend: { 
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        background: '#0a0a0a',
-                        surface: '#171717',
-                        border: '#262626',
-                        primary: '#ededed',
-                        secondary: '#a1a1aa'
+                        background: '#09090b', /* Zinc 950 */
+                        surface: '#18181b',    /* Zinc 900 */
+                        border: '#27272a',     /* Zinc 800 */
+                        primary: '#f4f4f5',    /* Zinc 100 */
+                        secondary: '#a1a1aa'   /* Zinc 400 */
                     },
                     animation: {
                         'fade-in': 'fadeIn 0.4s ease-out forwards',
@@ -39,50 +39,58 @@
         }
     </script>
     
-    <!-- FontAwesome & Marked -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Lucide Icons & Marked -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
     <style>
-        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        /* Scrollbar Elegan */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #52525b; }
         
-        .typing-cursor::after { content: ''; display: inline-block; width: 5px; height: 1em; background-color: #ededed; margin-left: 2px; vertical-align: text-bottom; animation: blink 1s step-start infinite; }
+        .typing-cursor::after { content: ''; display: inline-block; width: 4px; height: 1em; background-color: #f4f4f5; margin-left: 4px; vertical-align: text-bottom; animation: blink 1s step-start infinite; }
         @keyframes blink { 50% { opacity: 0; } }
         
-        .markdown-body { color: #ededed; font-size: 0.95rem; line-height: 1.7; }
+        /* Markdown Styles */
+        .markdown-body { color: #e4e4e7; font-size: 0.95rem; line-height: 1.7; }
         .markdown-body p { margin-bottom: 1rem; }
         .markdown-body ul, .markdown-body ol { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem; color: #d4d4d8; }
         .markdown-body strong { color: #ffffff; font-weight: 600; }
-        .markdown-body img { max-width: 100%; border-radius: 0.5rem; margin-top: 0.5rem; border: 1px solid #262626; }
+        .markdown-body img { max-width: 100%; border-radius: 0.5rem; margin-top: 0.5rem; border: 1px solid #27272a; }
         
-        .markdown-body code { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 0.85em; padding: 0.2em 0.4em; background: #27272a; color: #e4e4e7; border-radius: 0.3em; border: 1px solid #3f3f46; }
+        .markdown-body code { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 0.85em; padding: 0.2em 0.4em; background: #27272a; color: #f4f4f5; border-radius: 0.3em; border: 1px solid #3f3f46; }
         .markdown-body pre { margin: 0; }
         .markdown-body pre code { background: transparent; border: none; padding: 0; color: #e4e4e7; }
         
-        body { background-color: #0a0a0a; color: #ededed; }
+        body { background-color: #09090b; color: #f4f4f5; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         textarea { transition: height 0.1s ease; }
+        
+        /* Icon penyesuaian */
+        .lucide { stroke-width: 1.5; }
     </style>
 </head>
 <body class="h-screen flex overflow-hidden font-sans antialiased selection:bg-neutral-700 selection:text-white">
 
     <!-- Sidebar Minimalis -->
-    <aside id="sidebar" class="w-[280px] bg-background border-r border-border flex-shrink-0 flex flex-col transition-transform duration-300 md:relative absolute z-30 h-full -translate-x-full md:translate-x-0">
+    <aside id="sidebar" class="w-[260px] bg-background border-r border-border flex-shrink-0 flex flex-col transition-transform duration-300 md:relative absolute z-30 h-full -translate-x-full md:translate-x-0 shadow-xl md:shadow-none">
         <div class="h-14 flex items-center px-5 py-4">
-            <span class="text-lg font-semibold tracking-tight text-primary">NearsX.</span>
+            <span class="text-[17px] font-semibold tracking-tight text-primary flex items-center gap-2">
+                <i data-lucide="box" class="w-5 h-5 text-secondary"></i>
+                NearsX.
+            </span>
             <button onclick="toggleSidebar()" class="md:hidden ml-auto text-secondary hover:text-primary transition-colors">
-                <i class="fa-solid fa-xmark"></i>
+                <i data-lucide="x" class="w-5 h-5"></i>
             </button>
         </div>
 
         <div class="px-3 pb-3">
-            <button onclick="createNewChat()" class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg bg-surface border border-border hover:bg-neutral-800 transition-colors text-sm font-medium text-primary">
-                <span><i class="fa-solid fa-pen-to-square mr-2 opacity-70"></i> New chat</span>
-                <i class="fa-solid fa-plus text-xs opacity-50"></i>
+            <button onclick="createNewChat()" class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg bg-surface border border-border hover:border-[#3f3f46] transition-colors text-sm font-medium text-primary shadow-sm">
+                <span class="flex items-center gap-2"><i data-lucide="square-pen" class="w-4 h-4 text-secondary"></i> New chat</span>
+                <i data-lucide="plus" class="w-4 h-4 text-secondary"></i>
             </button>
         </div>
         
@@ -91,82 +99,83 @@
 
         <div class="p-4 border-t border-border flex justify-between items-center bg-background">
             <div class="flex items-center gap-3">
-                <div class="w-7 h-7 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center text-xs">US</div>
+                <div class="w-8 h-8 rounded-full bg-surface border border-border flex items-center justify-center text-xs font-medium">US</div>
                 <span class="font-medium text-sm text-primary">Workspace</span>
             </div>
-            <button onclick="clearAllHistory()" class="text-secondary hover:text-red-400 transition-colors" title="Clear History">
-                <i class="fa-solid fa-trash-can text-sm"></i>
+            <button onclick="clearAllHistory()" class="text-secondary hover:text-red-400 transition-colors p-1.5 rounded-md hover:bg-red-400/10" title="Clear History">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
             </button>
         </div>
     </aside>
 
-    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-20 hidden md:hidden transition-opacity"></div>
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-20 hidden transition-opacity"></div>
 
     <main class="flex-1 flex flex-col h-full relative w-full bg-background">
         
-        <header class="h-14 flex items-center justify-between px-4 sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border/50">
+        <header class="h-14 flex items-center justify-between px-4 sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border/40">
             <div class="flex items-center gap-3">
                 <button onclick="toggleSidebar()" class="md:hidden text-secondary hover:text-primary transition-colors">
-                    <i class="fa-solid fa-bars"></i>
+                    <i data-lucide="menu" class="w-5 h-5"></i>
                 </button>
                 <div class="relative">
                     <select id="model-selector" class="appearance-none bg-transparent hover:bg-surface border border-transparent hover:border-border text-sm rounded-lg pl-3 pr-8 py-1.5 outline-none text-primary cursor-pointer transition-colors font-medium">
                     </select>
-                    <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-[10px]"></i>
+                    <i data-lucide="chevron-down" class="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-secondary pointer-events-none"></i>
                 </div>
             </div>
         </header>
 
         <div id="chat-container" class="flex-1 overflow-y-auto px-4 md:px-0 py-6 space-y-8 pb-48 scroll-smooth flex flex-col items-center">
-            <div id="welcome-screen" class="h-full w-full max-w-3xl flex flex-col items-center justify-center text-center animate-fade-in mt-10">
+            <div id="welcome-screen" class="h-full w-full max-w-3xl flex flex-col items-center justify-center text-center animate-fade-in mt-6">
                 <div class="w-16 h-16 rounded-2xl bg-surface border border-border flex items-center justify-center mb-6 shadow-sm">
-                    <i class="fa-solid fa-layer-group text-2xl text-secondary"></i>
+                    <i data-lucide="sparkles" class="w-8 h-8 text-secondary"></i>
                 </div>
-                <h1 class="text-3xl font-semibold mb-3 tracking-tight text-primary">How can I help?</h1>
+                <h1 class="text-2xl md:text-3xl font-semibold mb-3 tracking-tight text-primary">How can I help you today?</h1>
                 <p class="text-secondary text-sm max-w-sm">
-                    Upload documents, write code, or start a conversation.
+                    Upload documents, analyze code, or start a new conversation.
                 </p>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-10 w-full max-w-xl">
-                    <button onclick="setSuggestion('Bantu saya merapikan kode Python ini')" class="p-4 rounded-xl border border-border bg-background hover:bg-surface transition-colors text-left flex flex-col gap-1.5 group shadow-sm">
-                        <span class="text-primary text-sm font-medium"><i class="fa-solid fa-code text-secondary mr-2"></i>Code Review</span>
+                    <button onclick="setSuggestion('Bantu saya merapikan kode Python ini')" class="p-4 rounded-xl border border-border bg-surface hover:bg-[#27272a] transition-colors text-left flex flex-col gap-2 group shadow-sm">
+                        <span class="text-primary text-sm font-medium flex items-center gap-2"><i data-lucide="code" class="w-4 h-4 text-secondary"></i>Code Review</span>
                         <span class="text-secondary text-xs">Bantu saya merapikan kode Python ini</span>
                     </button>
-                    <button onclick="setSuggestion('Tuliskan draft email profesional untuk klien')" class="p-4 rounded-xl border border-border bg-background hover:bg-surface transition-colors text-left flex flex-col gap-1.5 group shadow-sm">
-                        <span class="text-primary text-sm font-medium"><i class="fa-regular fa-envelope text-secondary mr-2"></i>Draft Email</span>
+                    <button onclick="setSuggestion('Tuliskan draft email profesional untuk klien')" class="p-4 rounded-xl border border-border bg-surface hover:bg-[#27272a] transition-colors text-left flex flex-col gap-2 group shadow-sm">
+                        <span class="text-primary text-sm font-medium flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 text-secondary"></i>Draft Email</span>
                         <span class="text-secondary text-xs">Tuliskan draft email profesional untuk klien</span>
                     </button>
                 </div>
             </div>
         </div>
 
-        <div class="absolute bottom-0 w-full bg-gradient-to-t from-background via-background to-transparent pt-10 pb-6 px-4 flex justify-center z-10">
+        <div class="absolute bottom-0 w-full bg-gradient-to-t from-background via-background to-transparent pt-12 pb-6 px-4 flex justify-center z-10">
             <form id="chat-form" class="w-full max-w-3xl relative">
-                <div class="relative flex flex-col bg-surface rounded-2xl border border-border shadow-lg transition-colors focus-within:border-neutral-600 focus-within:ring-1 focus-within:ring-neutral-600">
+                <!-- Wrapper Input Elegan -->
+                <div class="relative flex flex-col bg-surface rounded-2xl border border-border shadow-lg transition-colors focus-within:border-[#52525b]">
                     <div id="file-preview-container" class="flex gap-2 px-3 pt-3 overflow-x-auto hidden border-b border-border/50 pb-2"></div>
                     
-                    <div class="flex items-end relative min-h-[56px]">
-                        <label for="file-upload" class="p-3.5 ml-1 text-secondary hover:text-primary cursor-pointer transition-colors" title="Attach Files">
-                            <i class="fa-solid fa-paperclip text-lg"></i>
+                    <div class="flex items-end relative p-2 min-h-[56px]">
+                        <label for="file-upload" class="p-2.5 text-secondary hover:text-primary cursor-pointer transition-colors shrink-0 rounded-lg hover:bg-[#27272a] flex items-center justify-center" title="Attach Files">
+                            <i data-lucide="paperclip" class="w-5 h-5"></i>
                         </label>
                         <input type="file" id="file-upload" class="hidden" multiple accept="image/*,.pdf,.txt,.json,.csv,.js,.py,.html">
                         
-                        <textarea id="user-input" rows="1" class="w-full bg-transparent text-primary py-4 px-2 resize-none outline-none max-h-48 text-[15px] placeholder-secondary leading-relaxed" placeholder="Message NearsX..."></textarea>
+                        <textarea id="user-input" rows="1" class="w-full bg-transparent text-primary py-2.5 px-2 resize-none outline-none max-h-48 text-[15px] placeholder-secondary leading-relaxed" placeholder="Message NearsX..."></textarea>
                         
-                        <button type="submit" id="send-btn" class="p-2 mb-2 mr-2 rounded-xl bg-primary text-background hover:bg-white transition-all duration-200 disabled:opacity-30 disabled:bg-surface disabled:text-secondary disabled:border disabled:border-border flex items-center justify-center w-9 h-9" disabled>
-                            <i class="fa-solid fa-arrow-up text-sm"></i>
+                        <button type="submit" id="send-btn" class="p-2 ml-1 rounded-xl bg-primary text-background hover:bg-white transition-all duration-200 disabled:opacity-40 disabled:bg-surface disabled:text-secondary disabled:border disabled:border-border flex items-center justify-center shrink-0 w-9 h-9 border border-transparent shadow-sm" disabled>
+                            <i data-lucide="arrow-up" class="w-5 h-5"></i>
                         </button>
                     </div>
                 </div>
                 <div class="text-center mt-3">
-                    <span class="text-[10px] text-neutral-500 font-medium">NearsX AI can make mistakes. Consider verifying important information.</span>
+                    <span class="text-[11px] text-neutral-500 font-medium">NearsX AI can make mistakes. Consider verifying important information.</span>
                 </div>
             </form>
         </div>
     </main>
 
     <script>
-        // === GANTI DENGAN IP VPS KAMU + PORT 8080 ===
+        // === ROOT IP KAMU ===
         const WORKER_URL = "http://116.212.73.233:8080/"; 
         
         const MODELS = [
@@ -202,6 +211,7 @@
             });
             renderHistory();
             if (chatHistory.length > 0) loadConv(chatHistory[0].id);
+            lucide.createIcons();
         }
 
         const genId = () => Math.random().toString(36).substring(2, 15);
@@ -245,17 +255,18 @@
             chatHistory.forEach(conv => {
                 const isActive = conv.id === currentConvId;
                 const div = document.createElement('div');
-                div.className = `group flex justify-between items-center p-2.5 rounded-lg cursor-pointer text-sm transition-colors ${isActive ? 'bg-surface text-primary' : 'text-secondary hover:bg-neutral-800 hover:text-primary'}`;
+                div.className = `group flex justify-between items-center p-2 rounded-lg cursor-pointer text-sm transition-colors ${isActive ? 'bg-surface border border-border text-primary font-medium' : 'text-secondary hover:bg-[#27272a] hover:text-primary border border-transparent'}`;
                 div.innerHTML = `
-                    <div class="flex items-center gap-3 overflow-hidden w-full" onclick="loadConv('${conv.id}')">
-                        <span class="truncate font-medium">${conv.title}</span>
+                    <div class="flex items-center gap-2 overflow-hidden w-full px-1" onclick="loadConv('${conv.id}')">
+                        <span class="truncate">${conv.title}</span>
                     </div>
-                    <button class="opacity-0 group-hover:opacity-100 text-neutral-500 hover:text-red-400 transition-all ml-2" onclick="deleteChat('${conv.id}', event)">
-                        <i class="fa-solid fa-trash-can text-[11px]"></i>
+                    <button class="opacity-0 group-hover:opacity-100 text-neutral-500 hover:text-red-400 transition-all p-1" onclick="deleteChat('${conv.id}', event)">
+                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                     </button>
                 `;
                 ui.historyList.appendChild(div);
             });
+            lucide.createIcons();
         }
 
         function loadConv(id) {
@@ -292,23 +303,25 @@
                 const codeText = codeNode ? codeNode.innerText : pre.innerText;
 
                 const wrapper = document.createElement('div');
-                wrapper.className = 'code-wrapper my-4 rounded-xl overflow-hidden bg-[#0d0d0d] border border-border shadow-sm';
+                wrapper.className = 'code-wrapper my-4 rounded-xl overflow-hidden bg-[#0a0a0a] border border-border shadow-sm';
                 
                 const header = document.createElement('div');
-                header.className = 'flex justify-between items-center px-4 py-2 bg-[#171717] border-b border-border text-xs text-secondary font-mono';
+                header.className = 'flex justify-between items-center px-4 py-2 bg-surface border-b border-border text-xs text-secondary font-mono';
                 header.innerHTML = `
                     <span class="lowercase">${lang}</span>
                     <button class="copy-btn flex items-center gap-1.5 hover:text-primary transition-colors" title="Copy code">
-                        <i class="fa-regular fa-clone"></i> <span>Copy</span>
+                        <i data-lucide="copy" class="w-3.5 h-3.5"></i> <span>Copy</span>
                     </button>
                 `;
                 
                 const copyBtn = header.querySelector('.copy-btn');
                 copyBtn.addEventListener('click', () => {
                     navigator.clipboard.writeText(codeText).then(() => {
-                        copyBtn.innerHTML = '<i class="fa-solid fa-check text-green-500"></i> <span class="text-green-500">Copied</span>';
+                        copyBtn.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5 text-green-500"></i> <span class="text-green-500">Copied</span>';
+                        lucide.createIcons();
                         setTimeout(() => {
-                            copyBtn.innerHTML = '<i class="fa-regular fa-clone"></i> <span>Copy</span>';
+                            copyBtn.innerHTML = '<i data-lucide="copy" class="w-3.5 h-3.5"></i> <span>Copy</span>';
+                            lucide.createIcons();
                         }, 2000);
                     });
                 });
@@ -321,9 +334,10 @@
                 codeContent.appendChild(pre);
                 wrapper.appendChild(codeContent);
             });
+            lucide.createIcons();
         }
 
-        function appendMsg(role, content, isTyping = false, attachments = []) {
+        function appendMsg(role, content, isStreaming = false, attachments = []) {
             ui.welcomeScreen.style.display = 'none';
             
             const div = document.createElement('div');
@@ -336,7 +350,7 @@
                     if (att.type && att.type.startsWith('image/')) {
                         attachmentHTML += `<img src="${att.url}" class="h-24 w-auto rounded-lg border border-border object-cover">`;
                     } else {
-                        attachmentHTML += `<div class="flex items-center gap-2 bg-surface px-3 py-2 rounded-lg border border-border text-xs font-medium text-primary"><i class="fa-solid fa-file-lines text-secondary"></i> ${att.name}</div>`;
+                        attachmentHTML += `<div class="flex items-center gap-2 bg-background px-3 py-2 rounded-lg border border-border text-xs font-medium text-primary shadow-sm"><i data-lucide="file-text" class="w-4 h-4 text-secondary"></i> ${att.name}</div>`;
                     }
                 });
                 attachmentHTML += `</div>`;
@@ -348,50 +362,45 @@
                 bubble.className = 'px-5 py-3 rounded-2xl rounded-tr-sm bg-surface border border-border text-primary max-w-[85%] text-[15px] leading-relaxed shadow-sm';
                 bubble.innerHTML = attachmentHTML + (content ? `<div>${content}</div>` : '');
                 div.appendChild(bubble);
+                ui.chatContainer.appendChild(div);
+                ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
+                lucide.createIcons();
             } else {
                 bubble.className = 'text-primary markdown-body w-full max-w-full overflow-hidden flex gap-4';
                 
                 const avatar = document.createElement('div');
-                avatar.className = 'w-8 h-8 rounded-full border border-border flex items-center justify-center flex-shrink-0 mt-0.5 bg-background shadow-sm';
-                avatar.innerHTML = '<i class="fa-solid fa-sparkles text-[11px] text-primary"></i>';
+                avatar.className = 'w-7 h-7 rounded-md border border-border flex items-center justify-center flex-shrink-0 mt-0.5 bg-surface shadow-sm';
+                avatar.innerHTML = '<i data-lucide="sparkles" class="w-4 h-4 text-primary"></i>';
                 
                 const contentDiv = document.createElement('div');
                 contentDiv.className = 'flex-1 min-w-0';
 
-                if (isTyping) {
+                bubble.appendChild(avatar);
+                bubble.appendChild(contentDiv);
+                div.appendChild(bubble);
+                ui.chatContainer.appendChild(div);
+
+                if (isStreaming) {
                     contentDiv.classList.add('typing-cursor');
-                    bubble.appendChild(avatar);
-                    bubble.appendChild(contentDiv);
-                    div.appendChild(bubble);
-                    ui.chatContainer.appendChild(div);
-                    
-                    let i = 0;
-                    const speed = content.length > 500 ? 1 : 4; 
-                    const interval = setInterval(() => {
-                        if (i < content.length) {
-                            contentDiv.innerHTML = marked.parse(content.substring(0, i + 3));
-                            ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight; 
-                            i += 3;
-                        } else {
-                            clearInterval(interval);
+                    return {
+                        update: (text) => {
+                            contentDiv.innerHTML = marked.parse(text);
+                            ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
+                        },
+                        finish: (text) => {
                             contentDiv.classList.remove('typing-cursor');
-                            contentDiv.innerHTML = marked.parse(content);
+                            contentDiv.innerHTML = marked.parse(text);
                             formatCodeBlocks(contentDiv);
                             ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
                         }
-                    }, speed);
-                    return;
+                    };
                 } else {
                     contentDiv.innerHTML = marked.parse(content);
                     formatCodeBlocks(contentDiv);
-                    bubble.appendChild(avatar);
-                    bubble.appendChild(contentDiv);
-                    div.appendChild(bubble);
+                    ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
+                    lucide.createIcons();
                 }
             }
-            
-            ui.chatContainer.appendChild(div); 
-            ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
         }
 
         ui.fileInput.addEventListener('change', (e) => {
@@ -423,16 +432,17 @@
                     const url = URL.createObjectURL(file);
                     div.innerHTML = `<div class="h-14 w-14 rounded-lg border border-border overflow-hidden bg-background"><img src="${url}" class="h-full w-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"></div>`;
                 } else {
-                    div.innerHTML = `<div class="h-14 w-14 flex flex-col items-center justify-center bg-background rounded-lg border border-border text-[10px] text-secondary p-1"><i class="fa-regular fa-file-lines mb-1 text-base"></i><span class="truncate w-full text-center">${file.name}</span></div>`;
+                    div.innerHTML = `<div class="h-14 w-14 flex flex-col items-center justify-center bg-background rounded-lg border border-border text-[10px] text-secondary p-1"><i data-lucide="file-text" class="w-5 h-5 mb-1 text-secondary"></i><span class="truncate w-full text-center">${file.name}</span></div>`;
                 }
                 
                 div.innerHTML += `
-                    <button type="button" onclick="removeFile(${index})" class="absolute -top-1.5 -right-1.5 bg-neutral-700 text-white rounded-full w-4 h-4 flex items-center justify-center text-[9px] opacity-0 group-hover:opacity-100 transition-opacity shadow border border-neutral-600 hover:bg-neutral-600">
-                        <i class="fa-solid fa-xmark"></i>
+                    <button type="button" onclick="removeFile(${index})" class="absolute -top-1.5 -right-1.5 bg-surface text-primary rounded-full w-4 h-4 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow border border-border hover:bg-neutral-700">
+                        <i data-lucide="x" class="w-2.5 h-2.5"></i>
                     </button>
                 `;
                 ui.filePreview.appendChild(div);
             });
+            lucide.createIcons();
         }
 
         window.removeFile = function(index) {
@@ -470,7 +480,7 @@
         });
         ui.userInput.addEventListener('input', () => { autoResizeTextarea(); checkInputState(); });
 
-        // --- PENANGANAN RESPONSE STREAM / TEXT / JSON (FIX ERROR UNEXPECTED TOKEN) ---
+        // --- PENANGANAN FIX SSE / TRUE STREAMING ---
         ui.chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             if (isGenerating) return;
@@ -495,22 +505,7 @@
             
             isGenerating = true;
             ui.sendBtn.setAttribute('disabled', 'true');
-            ui.sendBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin text-sm"></i>';
-
-            const loadingDiv = document.createElement('div');
-            loadingDiv.className = "flex w-full max-w-3xl animate-fade-in mb-6 justify-start";
-            loadingDiv.innerHTML = `
-                <div class="flex gap-4">
-                    <div class="w-8 h-8 rounded-full border border-border flex items-center justify-center flex-shrink-0 mt-0.5 bg-background"><i class="fa-solid fa-sparkles text-[11px] text-secondary"></i></div>
-                    <div class="flex items-center gap-1.5 h-9 px-2">
-                        <div class="w-1.5 h-1.5 rounded-full bg-secondary animate-bounce" style="animation-delay: 0s"></div>
-                        <div class="w-1.5 h-1.5 rounded-full bg-secondary animate-bounce" style="animation-delay: 0.15s"></div>
-                        <div class="w-1.5 h-1.5 rounded-full bg-secondary animate-bounce" style="animation-delay: 0.3s"></div>
-                    </div>
-                </div>
-            `;
-            ui.chatContainer.appendChild(loadingDiv);
-            ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
+            ui.sendBtn.innerHTML = '<div class="w-4 h-4 border-2 border-background border-t-transparent rounded-full animate-spin"></div>';
 
             try {
                 let fetchOptions = { method: 'POST' };
@@ -535,56 +530,83 @@
                 }
 
                 const response = await fetch(WORKER_URL, fetchOptions);
-                const rawText = await response.text();
-                
-                ui.chatContainer.removeChild(loadingDiv);
-                
-                let aiReply = "";
+                if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
 
-                // Ekstraksi data jika formatnya SSE / Streaming Text (data: {...})
-                if (rawText.includes('data:')) {
-                    const lines = rawText.split('\n');
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder('utf-8');
+                let aiReply = "";
+                let buffer = "";
+
+                // Buat template message untuk streaming
+                const streamControl = appendMsg('ai', "", true);
+                lucide.createIcons();
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    buffer += decoder.decode(value, { stream: true });
+                    const lines = buffer.split('\n');
+                    
+                    // Simpan baris terakhir yang mungkin belum selesai/terpotong ke dalam buffer
+                    buffer = lines.pop();
+
                     for (let line of lines) {
                         line = line.trim();
+                        if (!line) continue;
+                        
+                        // PARSING SSE - Potong kata "data: " supaya ga error JSON.parse
                         if (line.startsWith('data:')) {
-                            const jsonStr = line.replace(/^data:\s*/, '');
-                            if (jsonStr === '[DONE]') continue;
+                            const dataStr = line.substring(5).trim();
+                            if (dataStr === '[DONE]') continue;
+                            
                             try {
-                                const parsed = JSON.parse(jsonStr);
-                                if (parsed.response) aiReply += parsed.response;
-                                else if (parsed.message) aiReply += parsed.message;
-                                else if (parsed.text) aiReply += parsed.text;
-                                else if (parsed.content) aiReply += parsed.content;
+                                const parsed = JSON.parse(dataStr);
+                                const chunkText = parsed.response || parsed.message || parsed.text || parsed.content || parsed.answer || "";
+                                if (chunkText) {
+                                    aiReply += chunkText;
+                                    streamControl.update(aiReply);
+                                }
                             } catch (err) {
-                                // Jika potongan bukan JSON valid, ambil mentahnya
-                                aiReply += jsonStr;
+                                // Abaikan chunk yang gagal diparse
                             }
+                        } else if (line.startsWith('{')) {
+                            // Fallback jika API membalas full JSON tanpa prefix data:
+                            try {
+                                const parsed = JSON.parse(line);
+                                const chunkText = parsed.response || parsed.message || parsed.text || parsed.content || parsed.answer || "";
+                                if (chunkText) {
+                                    aiReply += chunkText;
+                                    streamControl.update(aiReply);
+                                }
+                            } catch (err) {}
                         }
-                    }
-                } 
-
-                // Parsing jika formatnya JSON murni
-                if (!aiReply) {
-                    try {
-                        const parsed = JSON.parse(rawText);
-                        aiReply = parsed.response || parsed.message || parsed.text || parsed.answer || JSON.stringify(parsed);
-                    } catch (err) {
-                        // Jika teks biasa
-                        aiReply = rawText;
                     }
                 }
 
-                if (!aiReply.trim()) aiReply = "⚠️ Respon kosong dari server API.";
+                // Proses sisa text di buffer kalau ada
+                if (buffer.trim()) {
+                    let finalLine = buffer.trim();
+                    if (finalLine.startsWith('data:')) finalLine = finalLine.substring(5).trim();
+                    try {
+                        const parsed = JSON.parse(finalLine);
+                        const chunkText = parsed.response || parsed.message || parsed.text || parsed.content || parsed.answer || "";
+                        if (chunkText) aiReply += chunkText;
+                    } catch (e) {}
+                }
 
-                appendMsg('ai', aiReply, true);
+                if (!aiReply.trim()) aiReply = "⚠️ No response received from server.";
+                
+                // Matikan animasi ngetik, render full markdown + code blocks
+                streamControl.finish(aiReply);
                 saveHistory('ai', aiReply);
 
             } catch (error) {
-                ui.chatContainer.removeChild(loadingDiv);
                 appendMsg('ai', "⚠️ **Connection Error:** " + error.message, false);
             } finally {
                 isGenerating = false;
-                ui.sendBtn.innerHTML = '<i class="fa-solid fa-arrow-up text-sm"></i>';
+                ui.sendBtn.innerHTML = '<i data-lucide="arrow-up" class="w-5 h-5"></i>';
+                lucide.createIcons();
                 checkInputState();
             }
         });

@@ -8,7 +8,7 @@
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,20 +19,12 @@
                 extend: { 
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        background: '#09090b', /* Zinc 950 */
-                        surface: '#18181b',    /* Zinc 900 */
-                        border: '#27272a',     /* Zinc 800 */
-                        primary: '#f4f4f5',    /* Zinc 100 */
-                        secondary: '#a1a1aa'   /* Zinc 400 */
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.4s ease-out forwards',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(10px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
+                        background: '#09090b', /* zinc-950 */
+                        surface: '#18181b',    /* zinc-900 */
+                        border: '#27272a',     /* zinc-800 */
+                        primary: '#f4f4f5',    /* zinc-100 */
+                        secondary: '#a1a1aa',  /* zinc-400 */
+                        accent: '#e4e4e7',     /* zinc-200 */
                     }
                 } 
             }
@@ -44,138 +36,162 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
     <style>
-        /* Scrollbar Elegan */
-        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #52525b; }
         
-        .typing-cursor::after { content: ''; display: inline-block; width: 4px; height: 1em; background-color: #f4f4f5; margin-left: 4px; vertical-align: text-bottom; animation: blink 1s step-start infinite; }
+        body { background-color: #09090b; color: #f4f4f5; font-family: 'Inter', sans-serif; }
+        
+        .typing-cursor::after { 
+            content: ''; display: inline-block; width: 5px; height: 1em; 
+            background-color: #f4f4f5; margin-left: 2px; vertical-align: text-bottom; 
+            animation: blink 1s step-start infinite; 
+        }
         @keyframes blink { 50% { opacity: 0; } }
         
-        /* Markdown Styles */
-        .markdown-body { color: #e4e4e7; font-size: 0.95rem; line-height: 1.7; }
-        .markdown-body p { margin-bottom: 1rem; }
-        .markdown-body ul, .markdown-body ol { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem; color: #d4d4d8; }
+        /* Markdown Styling - Clean & Minimalist */
+        .markdown-body { font-size: 0.95rem; line-height: 1.7; color: #e4e4e7; }
+        .markdown-body p { margin-bottom: 1.25rem; }
+        .markdown-body p:last-child { margin-bottom: 0; }
+        .markdown-body ul, .markdown-body ol { margin-left: 1.25rem; margin-bottom: 1.25rem; }
+        .markdown-body ul { list-style-type: disc; }
+        .markdown-body ol { list-style-type: decimal; }
         .markdown-body strong { color: #ffffff; font-weight: 600; }
-        .markdown-body img { max-width: 100%; border-radius: 0.5rem; margin-top: 0.5rem; border: 1px solid #27272a; }
+        .markdown-body a { color: #60a5fa; text-decoration: none; }
+        .markdown-body a:hover { text-decoration: underline; }
         
-        .markdown-body code { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 0.85em; padding: 0.2em 0.4em; background: #27272a; color: #f4f4f5; border-radius: 0.3em; border: 1px solid #3f3f46; }
+        /* Code Block Styling */
+        .markdown-body code { 
+            font-family: ui-monospace, SFMono-Regular, monospace; font-size: 0.85em; 
+            padding: 0.2em 0.4em; background: #27272a; color: #f4f4f5; 
+            border-radius: 0.25rem; 
+        }
         .markdown-body pre { margin: 0; }
-        .markdown-body pre code { background: transparent; border: none; padding: 0; color: #e4e4e7; }
+        .markdown-body pre code { background: transparent; padding: 0; color: inherit; }
         
-        body { background-color: #09090b; color: #f4f4f5; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        textarea { transition: height 0.1s ease; }
-        
-        /* Icon penyesuaian */
-        .lucide { stroke-width: 1.5; }
     </style>
 </head>
-<body class="h-screen flex overflow-hidden font-sans antialiased selection:bg-neutral-700 selection:text-white">
+<body class="h-screen flex overflow-hidden antialiased selection:bg-zinc-800 selection:text-white">
 
-    <!-- Sidebar Minimalis -->
-    <aside id="sidebar" class="w-[260px] bg-background border-r border-border flex-shrink-0 flex flex-col transition-transform duration-300 md:relative absolute z-30 h-full -translate-x-full md:translate-x-0 shadow-xl md:shadow-none">
-        <div class="h-14 flex items-center px-5 py-4">
-            <span class="text-[17px] font-semibold tracking-tight text-primary flex items-center gap-2">
-                <i data-lucide="box" class="w-5 h-5 text-secondary"></i>
-                NearsX.
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-[260px] bg-background border-r border-border flex-shrink-0 flex flex-col transition-transform duration-300 md:relative absolute z-30 h-full -translate-x-full md:translate-x-0">
+        <div class="h-14 flex items-center justify-between px-4 py-4">
+            <span class="text-base font-semibold tracking-tight text-primary flex items-center gap-2">
+                <i data-lucide="hexagon" class="w-5 h-5"></i> NearsX.
             </span>
-            <button onclick="toggleSidebar()" class="md:hidden ml-auto text-secondary hover:text-primary transition-colors">
+            <button onclick="toggleSidebar()" class="md:hidden text-secondary hover:text-primary transition-colors">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
         </div>
 
         <div class="px-3 pb-3">
-            <button onclick="createNewChat()" class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg bg-surface border border-border hover:border-[#3f3f46] transition-colors text-sm font-medium text-primary shadow-sm">
-                <span class="flex items-center gap-2"><i data-lucide="square-pen" class="w-4 h-4 text-secondary"></i> New chat</span>
-                <i data-lucide="plus" class="w-4 h-4 text-secondary"></i>
+            <button onclick="createNewChat()" class="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-surface border border-border hover:bg-zinc-800 transition-colors text-sm font-medium text-primary shadow-sm">
+                <span class="flex items-center gap-2"><i data-lucide="square-pen" class="w-4 h-4 text-secondary"></i> Chat Baru</span>
             </button>
         </div>
         
-        <div class="px-4 pt-2 pb-1 text-[11px] font-semibold text-secondary uppercase tracking-wider">History</div>
+        <div class="px-4 pt-4 pb-2 text-xs font-medium text-secondary">Riwayat Percakapan</div>
         <div class="flex-1 overflow-y-auto px-2 space-y-0.5 no-scrollbar" id="chat-history-list"></div>
 
-        <div class="p-4 border-t border-border flex justify-between items-center bg-background">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-surface border border-border flex items-center justify-center text-xs font-medium">US</div>
+        <div class="p-3 border-t border-border flex justify-between items-center bg-background">
+            <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-full bg-zinc-800 flex items-center justify-center text-xs font-medium border border-zinc-700">US</div>
                 <span class="font-medium text-sm text-primary">Workspace</span>
             </div>
-            <button onclick="clearAllHistory()" class="text-secondary hover:text-red-400 transition-colors p-1.5 rounded-md hover:bg-red-400/10" title="Clear History">
+            <button onclick="clearAllHistory()" class="text-secondary hover:text-red-400 p-2 rounded-lg hover:bg-zinc-900 transition-colors" title="Hapus Riwayat">
                 <i data-lucide="trash-2" class="w-4 h-4"></i>
             </button>
         </div>
     </aside>
 
-    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-20 hidden transition-opacity"></div>
+    <!-- Overlay Mobile -->
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-20 hidden md:hidden transition-opacity"></div>
 
+    <!-- Main Chat Area -->
     <main class="flex-1 flex flex-col h-full relative w-full bg-background">
         
-        <header class="h-14 flex items-center justify-between px-4 sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border/40">
+        <header class="h-14 flex items-center justify-between px-4 sticky top-0 z-10 bg-background/90 backdrop-blur-sm border-b border-border/50">
             <div class="flex items-center gap-3">
-                <button onclick="toggleSidebar()" class="md:hidden text-secondary hover:text-primary transition-colors">
+                <button onclick="toggleSidebar()" class="md:hidden text-secondary hover:text-primary transition-colors p-1 -ml-1">
                     <i data-lucide="menu" class="w-5 h-5"></i>
                 </button>
-                <div class="relative">
-                    <select id="model-selector" class="appearance-none bg-transparent hover:bg-surface border border-transparent hover:border-border text-sm rounded-lg pl-3 pr-8 py-1.5 outline-none text-primary cursor-pointer transition-colors font-medium">
+                <div class="relative flex items-center">
+                    <select id="model-selector" class="appearance-none bg-transparent hover:bg-surface border border-transparent hover:border-border text-sm rounded-lg pl-2 pr-8 py-1.5 outline-none text-primary cursor-pointer transition-colors font-medium">
+                        <!-- Options dipopulasi via JS -->
                     </select>
-                    <i data-lucide="chevron-down" class="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-secondary pointer-events-none"></i>
+                    <i data-lucide="chevron-down" class="absolute right-2 text-secondary pointer-events-none w-4 h-4"></i>
                 </div>
             </div>
         </header>
 
-        <div id="chat-container" class="flex-1 overflow-y-auto px-4 md:px-0 py-6 space-y-8 pb-48 scroll-smooth flex flex-col items-center">
-            <div id="welcome-screen" class="h-full w-full max-w-3xl flex flex-col items-center justify-center text-center animate-fade-in mt-6">
-                <div class="w-16 h-16 rounded-2xl bg-surface border border-border flex items-center justify-center mb-6 shadow-sm">
-                    <i data-lucide="sparkles" class="w-8 h-8 text-secondary"></i>
+        <div id="chat-container" class="flex-1 overflow-y-auto px-4 md:px-0 py-6 space-y-8 pb-32 scroll-smooth flex flex-col items-center">
+            
+            <!-- Welcome Screen -->
+            <div id="welcome-screen" class="h-full w-full max-w-2xl flex flex-col items-center justify-center text-center mt-8 md:mt-16 transition-opacity duration-500">
+                <div class="w-14 h-14 rounded-2xl bg-surface border border-border flex items-center justify-center mb-6 shadow-sm">
+                    <i data-lucide="layers" class="w-7 h-7 text-secondary"></i>
                 </div>
-                <h1 class="text-2xl md:text-3xl font-semibold mb-3 tracking-tight text-primary">How can I help you today?</h1>
-                <p class="text-secondary text-sm max-w-sm">
-                    Upload documents, analyze code, or start a new conversation.
-                </p>
+                <h1 class="text-2xl md:text-3xl font-semibold mb-2 tracking-tight text-primary">Apa yang bisa saya bantu?</h1>
+                <p class="text-secondary text-sm mb-10">Kirim pesan, unggah dokumen, atau tulis kode.</p>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-10 w-full max-w-xl">
-                    <button onclick="setSuggestion('Bantu saya merapikan kode Python ini')" class="p-4 rounded-xl border border-border bg-surface hover:bg-[#27272a] transition-colors text-left flex flex-col gap-2 group shadow-sm">
-                        <span class="text-primary text-sm font-medium flex items-center gap-2"><i data-lucide="code" class="w-4 h-4 text-secondary"></i>Code Review</span>
-                        <span class="text-secondary text-xs">Bantu saya merapikan kode Python ini</span>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
+                    <button onclick="setSuggestion('Bantu saya merapikan kode Python ini')" class="p-3.5 rounded-xl border border-border bg-surface/50 hover:bg-surface transition-colors text-left flex items-start gap-3 group">
+                        <i data-lucide="code" class="w-5 h-5 text-secondary group-hover:text-primary mt-0.5 transition-colors"></i>
+                        <div class="flex flex-col">
+                            <span class="text-primary text-sm font-medium">Review Kode</span>
+                            <span class="text-secondary text-xs mt-0.5">Bantu rapikan sintaks Python</span>
+                        </div>
                     </button>
-                    <button onclick="setSuggestion('Tuliskan draft email profesional untuk klien')" class="p-4 rounded-xl border border-border bg-surface hover:bg-[#27272a] transition-colors text-left flex flex-col gap-2 group shadow-sm">
-                        <span class="text-primary text-sm font-medium flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 text-secondary"></i>Draft Email</span>
-                        <span class="text-secondary text-xs">Tuliskan draft email profesional untuk klien</span>
+                    <button onclick="setSuggestion('Tuliskan draft email profesional untuk klien')" class="p-3.5 rounded-xl border border-border bg-surface/50 hover:bg-surface transition-colors text-left flex items-start gap-3 group">
+                        <i data-lucide="mail" class="w-5 h-5 text-secondary group-hover:text-primary mt-0.5 transition-colors"></i>
+                        <div class="flex flex-col">
+                            <span class="text-primary text-sm font-medium">Draft Email</span>
+                            <span class="text-secondary text-xs mt-0.5">Email profesional ke klien</span>
+                        </div>
                     </button>
                 </div>
             </div>
         </div>
 
-        <div class="absolute bottom-0 w-full bg-gradient-to-t from-background via-background to-transparent pt-12 pb-6 px-4 flex justify-center z-10">
+        <!-- Input Area -->
+        <div class="absolute bottom-0 w-full bg-gradient-to-t from-background via-background to-transparent pt-8 pb-6 px-4 md:px-0 flex justify-center z-10">
             <form id="chat-form" class="w-full max-w-3xl relative">
-                <!-- Wrapper Input Elegan -->
-                <div class="relative flex flex-col bg-surface rounded-2xl border border-border shadow-lg transition-colors focus-within:border-[#52525b]">
-                    <div id="file-preview-container" class="flex gap-2 px-3 pt-3 overflow-x-auto hidden border-b border-border/50 pb-2"></div>
+                
+                <!-- Unified Input Box -->
+                <div class="relative flex flex-col bg-surface rounded-2xl border border-border shadow-sm transition-all focus-within:border-zinc-600 focus-within:ring-1 focus-within:ring-zinc-600/50">
                     
-                    <div class="flex items-end relative p-2 min-h-[56px]">
-                        <label for="file-upload" class="p-2.5 text-secondary hover:text-primary cursor-pointer transition-colors shrink-0 rounded-lg hover:bg-[#27272a] flex items-center justify-center" title="Attach Files">
-                            <i data-lucide="paperclip" class="w-5 h-5"></i>
-                        </label>
-                        <input type="file" id="file-upload" class="hidden" multiple accept="image/*,.pdf,.txt,.json,.csv,.js,.py,.html">
+                    <!-- File Preview Area -->
+                    <div id="file-preview-container" class="flex gap-2 px-3 pt-3 overflow-x-auto hidden"></div>
+                    
+                    <textarea id="user-input" rows="1" class="w-full bg-transparent text-primary pt-4 pb-12 px-4 resize-none outline-none max-h-[200px] text-[15px] placeholder-zinc-500 leading-relaxed" placeholder="Ketik pesan ke NearsX..."></textarea>
+                    
+                    <!-- Bottom Controls in Input Box -->
+                    <div class="absolute bottom-2 left-2 right-2 flex justify-between items-center">
+                        <div>
+                            <label for="file-upload" class="p-2 text-secondary hover:text-primary hover:bg-zinc-800 rounded-lg cursor-pointer transition-colors flex items-center justify-center" title="Lampirkan File">
+                                <i data-lucide="paperclip" class="w-5 h-5"></i>
+                            </label>
+                            <input type="file" id="file-upload" class="hidden" multiple accept="image/*,.pdf,.txt,.json,.csv,.js,.py,.html">
+                        </div>
                         
-                        <textarea id="user-input" rows="1" class="w-full bg-transparent text-primary py-2.5 px-2 resize-none outline-none max-h-48 text-[15px] placeholder-secondary leading-relaxed" placeholder="Message NearsX..."></textarea>
-                        
-                        <button type="submit" id="send-btn" class="p-2 ml-1 rounded-xl bg-primary text-background hover:bg-white transition-all duration-200 disabled:opacity-40 disabled:bg-surface disabled:text-secondary disabled:border disabled:border-border flex items-center justify-center shrink-0 w-9 h-9 border border-transparent shadow-sm" disabled>
+                        <button type="submit" id="send-btn" class="p-2 bg-zinc-200 text-zinc-950 hover:bg-white rounded-lg transition-all disabled:opacity-40 disabled:bg-zinc-800 disabled:text-zinc-500 flex items-center justify-center" disabled>
                             <i data-lucide="arrow-up" class="w-5 h-5"></i>
                         </button>
                     </div>
                 </div>
+                
                 <div class="text-center mt-3">
-                    <span class="text-[11px] text-neutral-500 font-medium">NearsX AI can make mistakes. Consider verifying important information.</span>
+                    <span class="text-[10px] text-zinc-500 font-medium tracking-wide">AI dapat membuat kesalahan. Periksa kembali info penting.</span>
                 </div>
             </form>
         </div>
     </main>
 
     <script>
-        // === ROOT IP KAMU ===
+        // === ROOT VPS SESUAI REQUEST ===
         const WORKER_URL = "http://116.212.73.233:8080/"; 
         
         const MODELS = [
@@ -209,9 +225,9 @@
                 if(m === 'gpt-4o') opt.selected = true;
                 ui.modelSelector.add(opt);
             });
+            lucide.createIcons(); // Init Lucide Icons
             renderHistory();
             if (chatHistory.length > 0) loadConv(chatHistory[0].id);
-            lucide.createIcons();
         }
 
         const genId = () => Math.random().toString(36).substring(2, 15);
@@ -241,7 +257,7 @@
             if (!currentConvId) currentConvId = genId();
             let conv = chatHistory.find(c => c.id === currentConvId);
             if (!conv) {
-                const title = content.split(' ').slice(0, 4).join(' ') + '...';
+                const title = content.split(' ').slice(0, 5).join(' ') + '...';
                 conv = { id: currentConvId, title: title, messages: [] };
                 chatHistory.unshift(conv);
             }
@@ -255,18 +271,18 @@
             chatHistory.forEach(conv => {
                 const isActive = conv.id === currentConvId;
                 const div = document.createElement('div');
-                div.className = `group flex justify-between items-center p-2 rounded-lg cursor-pointer text-sm transition-colors ${isActive ? 'bg-surface border border-border text-primary font-medium' : 'text-secondary hover:bg-[#27272a] hover:text-primary border border-transparent'}`;
+                div.className = `group flex justify-between items-center p-2 rounded-lg cursor-pointer text-sm transition-colors ${isActive ? 'bg-zinc-800 text-primary' : 'text-secondary hover:bg-surface hover:text-primary'}`;
                 div.innerHTML = `
-                    <div class="flex items-center gap-2 overflow-hidden w-full px-1" onclick="loadConv('${conv.id}')">
-                        <span class="truncate">${conv.title}</span>
+                    <div class="flex items-center gap-2 overflow-hidden w-full" onclick="loadConv('${conv.id}')">
+                        <span class="truncate font-medium">${conv.title}</span>
                     </div>
-                    <button class="opacity-0 group-hover:opacity-100 text-neutral-500 hover:text-red-400 transition-all p-1" onclick="deleteChat('${conv.id}', event)">
+                    <button class="opacity-0 group-hover:opacity-100 text-zinc-500 hover:text-red-400 transition-all ml-2 p-1" onclick="deleteChat('${conv.id}', event)">
                         <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                     </button>
                 `;
                 ui.historyList.appendChild(div);
             });
-            lucide.createIcons();
+            lucide.createIcons({ root: ui.historyList });
         }
 
         function loadConv(id) {
@@ -274,7 +290,7 @@
             const conv = chatHistory.find(c => c.id === id);
             ui.chatContainer.innerHTML = '';
             ui.welcomeScreen.style.display = 'none';
-            if (conv) conv.messages.forEach(msg => appendMsg(msg.role, msg.content, false, msg.attachments));
+            if (conv) conv.messages.forEach(msg => appendMsg(msg.role, msg.content, msg.attachments));
             renderHistory();
             if(window.innerWidth < 768 && !ui.sidebar.classList.contains('-translate-x-full')) toggleSidebar();
         }
@@ -287,7 +303,7 @@
         }
 
         function clearAllHistory() {
-            if(confirm('Clear all conversation history?')) {
+            if(confirm('Hapus semua riwayat percakapan?')) {
                 chatHistory = []; localStorage.removeItem('nearsx_history');
                 createNewChat(); renderHistory();
             }
@@ -303,25 +319,25 @@
                 const codeText = codeNode ? codeNode.innerText : pre.innerText;
 
                 const wrapper = document.createElement('div');
-                wrapper.className = 'code-wrapper my-4 rounded-xl overflow-hidden bg-[#0a0a0a] border border-border shadow-sm';
+                wrapper.className = 'code-wrapper my-4 rounded-xl overflow-hidden bg-zinc-950 border border-border shadow-sm';
                 
                 const header = document.createElement('div');
-                header.className = 'flex justify-between items-center px-4 py-2 bg-surface border-b border-border text-xs text-secondary font-mono';
+                header.className = 'flex justify-between items-center px-4 py-2 bg-zinc-900 border-b border-border text-xs text-secondary font-mono';
                 header.innerHTML = `
                     <span class="lowercase">${lang}</span>
-                    <button class="copy-btn flex items-center gap-1.5 hover:text-primary transition-colors" title="Copy code">
-                        <i data-lucide="copy" class="w-3.5 h-3.5"></i> <span>Copy</span>
+                    <button class="copy-btn flex items-center gap-1.5 hover:text-primary transition-colors">
+                        <i data-lucide="copy" class="w-3.5 h-3.5"></i> <span>Salin</span>
                     </button>
                 `;
                 
                 const copyBtn = header.querySelector('.copy-btn');
                 copyBtn.addEventListener('click', () => {
                     navigator.clipboard.writeText(codeText).then(() => {
-                        copyBtn.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5 text-green-500"></i> <span class="text-green-500">Copied</span>';
-                        lucide.createIcons();
+                        copyBtn.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5 text-green-500"></i> <span class="text-green-500">Tersalin</span>';
+                        lucide.createIcons({ root: copyBtn });
                         setTimeout(() => {
-                            copyBtn.innerHTML = '<i data-lucide="copy" class="w-3.5 h-3.5"></i> <span>Copy</span>';
-                            lucide.createIcons();
+                            copyBtn.innerHTML = '<i data-lucide="copy" class="w-3.5 h-3.5"></i> <span>Salin</span>';
+                            lucide.createIcons({ root: copyBtn });
                         }, 2000);
                     });
                 });
@@ -334,79 +350,64 @@
                 codeContent.appendChild(pre);
                 wrapper.appendChild(codeContent);
             });
-            lucide.createIcons();
+            lucide.createIcons({ root: container });
         }
 
-        function appendMsg(role, content, isStreaming = false, attachments = []) {
+        // Render lampiran file di dalam chat history
+        function generateAttachmentHTML(attachments) {
+            if (!attachments || attachments.length === 0) return '';
+            let html = `<div class="flex flex-wrap gap-2 mb-3">`;
+            attachments.forEach(att => {
+                if (att.type && att.type.startsWith('image/')) {
+                    html += `<img src="${att.url}" class="h-20 w-auto rounded-lg border border-border object-cover shadow-sm">`;
+                } else {
+                    html += `<div class="flex items-center gap-2 bg-background px-3 py-1.5 rounded-lg border border-border text-xs font-medium text-primary"><i data-lucide="file-text" class="w-3.5 h-3.5 text-secondary"></i> ${att.name}</div>`;
+                }
+            });
+            html += `</div>`;
+            return html;
+        }
+
+        // Fungsi Append Message statis (untuk riwayat)
+        function appendMsg(role, content, attachments = []) {
             ui.welcomeScreen.style.display = 'none';
             
             const div = document.createElement('div');
-            div.className = `flex w-full max-w-3xl animate-fade-in mb-6 ${role === 'user' ? 'justify-end' : 'justify-start'}`;
+            div.className = `flex w-full max-w-3xl mb-6 ${role === 'user' ? 'justify-end' : 'justify-start'}`;
             
-            let attachmentHTML = '';
-            if (attachments && attachments.length > 0) {
-                attachmentHTML = `<div class="flex flex-wrap gap-2 mb-2">`;
-                attachments.forEach(att => {
-                    if (att.type && att.type.startsWith('image/')) {
-                        attachmentHTML += `<img src="${att.url}" class="h-24 w-auto rounded-lg border border-border object-cover">`;
-                    } else {
-                        attachmentHTML += `<div class="flex items-center gap-2 bg-background px-3 py-2 rounded-lg border border-border text-xs font-medium text-primary shadow-sm"><i data-lucide="file-text" class="w-4 h-4 text-secondary"></i> ${att.name}</div>`;
-                    }
-                });
-                attachmentHTML += `</div>`;
-            }
+            const attachmentHTML = generateAttachmentHTML(attachments);
 
-            const bubble = document.createElement('div');
-            
             if (role === 'user') {
-                bubble.className = 'px-5 py-3 rounded-2xl rounded-tr-sm bg-surface border border-border text-primary max-w-[85%] text-[15px] leading-relaxed shadow-sm';
-                bubble.innerHTML = attachmentHTML + (content ? `<div>${content}</div>` : '');
-                div.appendChild(bubble);
-                ui.chatContainer.appendChild(div);
-                ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
-                lucide.createIcons();
+                div.innerHTML = `
+                    <div class="px-5 py-3 rounded-2xl rounded-tr-sm bg-zinc-800 text-primary max-w-[85%] text-[15px] leading-relaxed shadow-sm">
+                        ${attachmentHTML}
+                        <div>${content}</div>
+                    </div>
+                `;
             } else {
-                bubble.className = 'text-primary markdown-body w-full max-w-full overflow-hidden flex gap-4';
-                
-                const avatar = document.createElement('div');
-                avatar.className = 'w-7 h-7 rounded-md border border-border flex items-center justify-center flex-shrink-0 mt-0.5 bg-surface shadow-sm';
-                avatar.innerHTML = '<i data-lucide="sparkles" class="w-4 h-4 text-primary"></i>';
-                
-                const contentDiv = document.createElement('div');
-                contentDiv.className = 'flex-1 min-w-0';
-
-                bubble.appendChild(avatar);
-                bubble.appendChild(contentDiv);
-                div.appendChild(bubble);
-                ui.chatContainer.appendChild(div);
-
-                if (isStreaming) {
-                    contentDiv.classList.add('typing-cursor');
-                    return {
-                        update: (text) => {
-                            contentDiv.innerHTML = marked.parse(text);
-                            ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
-                        },
-                        finish: (text) => {
-                            contentDiv.classList.remove('typing-cursor');
-                            contentDiv.innerHTML = marked.parse(text);
-                            formatCodeBlocks(contentDiv);
-                            ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
-                        }
-                    };
-                } else {
-                    contentDiv.innerHTML = marked.parse(content);
-                    formatCodeBlocks(contentDiv);
-                    ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
-                    lucide.createIcons();
-                }
+                div.innerHTML = `
+                    <div class="text-primary markdown-body w-full max-w-full overflow-hidden flex gap-4">
+                        <div class="w-8 h-8 rounded-full border border-border flex items-center justify-center flex-shrink-0 mt-0.5 bg-background shadow-sm">
+                            <i data-lucide="hexagon" class="w-4 h-4 text-primary"></i>
+                        </div>
+                        <div class="flex-1 min-w-0 content-wrapper"></div>
+                    </div>
+                `;
+                const contentWrapper = div.querySelector('.content-wrapper');
+                contentWrapper.innerHTML = marked.parse(content);
+                formatCodeBlocks(contentWrapper);
             }
+            
+            ui.chatContainer.appendChild(div);
+            lucide.createIcons({ root: div });
+            ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
         }
 
+        // File handling
         ui.fileInput.addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
             if (selectedFiles.length + files.length > 5) {
-                alert("Maximum 5 files allowed per message."); return;
+                alert("Maksimal 5 file."); return;
             }
             selectedFiles = [...selectedFiles, ...files];
             renderFilePreviews();
@@ -426,23 +427,23 @@
             selectedFiles.forEach((file, index) => {
                 const isImage = file.type.startsWith('image/');
                 const div = document.createElement('div');
-                div.className = "relative group flex-shrink-0 mb-1";
+                div.className = "relative group flex-shrink-0 mb-2";
                 
                 if (isImage) {
                     const url = URL.createObjectURL(file);
-                    div.innerHTML = `<div class="h-14 w-14 rounded-lg border border-border overflow-hidden bg-background"><img src="${url}" class="h-full w-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"></div>`;
+                    div.innerHTML = `<div class="h-12 w-12 rounded-lg border border-border overflow-hidden bg-background"><img src="${url}" class="h-full w-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"></div>`;
                 } else {
-                    div.innerHTML = `<div class="h-14 w-14 flex flex-col items-center justify-center bg-background rounded-lg border border-border text-[10px] text-secondary p-1"><i data-lucide="file-text" class="w-5 h-5 mb-1 text-secondary"></i><span class="truncate w-full text-center">${file.name}</span></div>`;
+                    div.innerHTML = `<div class="h-12 w-12 flex flex-col items-center justify-center bg-background rounded-lg border border-border text-[9px] text-secondary p-1"><i data-lucide="file-text" class="w-4 h-4 mb-1"></i><span class="truncate w-full text-center">${file.name}</span></div>`;
                 }
                 
                 div.innerHTML += `
-                    <button type="button" onclick="removeFile(${index})" class="absolute -top-1.5 -right-1.5 bg-surface text-primary rounded-full w-4 h-4 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow border border-border hover:bg-neutral-700">
+                    <button type="button" onclick="removeFile(${index})" class="absolute -top-2 -right-2 bg-zinc-700 text-white rounded-full w-4 h-4 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm border border-zinc-600 hover:bg-zinc-600">
                         <i data-lucide="x" class="w-2.5 h-2.5"></i>
                     </button>
                 `;
                 ui.filePreview.appendChild(div);
             });
-            lucide.createIcons();
+            lucide.createIcons({ root: ui.filePreview });
         }
 
         window.removeFile = function(index) {
@@ -451,10 +452,7 @@
             checkInputState();
         }
 
-        function clearFiles() {
-            selectedFiles = [];
-            renderFilePreviews();
-        }
+        function clearFiles() { selectedFiles = []; renderFilePreviews(); }
 
         function autoResizeTextarea() {
             ui.userInput.style.height = 'auto';
@@ -480,7 +478,7 @@
         });
         ui.userInput.addEventListener('input', () => { autoResizeTextarea(); checkInputState(); });
 
-        // --- PENANGANAN FIX SSE / TRUE STREAMING ---
+        // --- CORE FETCH DENGAN STREAMING SSE (MENCEGAH ERROR JSON PARSE) ---
         ui.chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             if (isGenerating) return;
@@ -495,17 +493,39 @@
                 url: f.type.startsWith('image/') ? URL.createObjectURL(f) : null
             }));
 
+            // Tampilkan pesan user
+            appendMsg('user', question, attachmentsForHistory);
+            saveHistory('user', question, attachmentsForHistory);
+            
+            // Reset Input
             ui.userInput.value = '';
             ui.userInput.style.height = 'auto';
             clearFiles();
             checkInputState();
             
-            appendMsg('user', question, false, attachmentsForHistory);
-            saveHistory('user', question, attachmentsForHistory);
-            
             isGenerating = true;
             ui.sendBtn.setAttribute('disabled', 'true');
-            ui.sendBtn.innerHTML = '<div class="w-4 h-4 border-2 border-background border-t-transparent rounded-full animate-spin"></div>';
+            // Ganti icon ke loader
+            ui.sendBtn.innerHTML = '<i data-lucide="loader-circle" class="w-5 h-5 animate-spin"></i>';
+            lucide.createIcons({ root: ui.sendBtn });
+
+            // Buat DOM Element untuk AI
+            const aiDiv = document.createElement('div');
+            aiDiv.className = `flex w-full max-w-3xl mb-6 justify-start`;
+            aiDiv.innerHTML = `
+                <div class="text-primary markdown-body w-full max-w-full overflow-hidden flex gap-4">
+                    <div class="w-8 h-8 rounded-full border border-border flex items-center justify-center flex-shrink-0 mt-0.5 bg-background shadow-sm">
+                        <i data-lucide="hexagon" class="w-4 h-4 text-primary"></i>
+                    </div>
+                    <div class="flex-1 min-w-0 content-wrapper typing-cursor"></div>
+                </div>
+            `;
+            ui.chatContainer.appendChild(aiDiv);
+            lucide.createIcons({ root: aiDiv });
+            const contentDiv = aiDiv.querySelector('.content-wrapper');
+            ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
+
+            let aiReply = "";
 
             try {
                 let fetchOptions = { method: 'POST' };
@@ -529,85 +549,80 @@
                     });
                 }
 
+                // Ambil data stream
                 const response = await fetch(WORKER_URL, fetchOptions);
-                if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
+                
+                if (!response.ok) {
+                    throw new Error(`Server merespon dengan status: ${response.status}`);
+                }
 
                 const reader = response.body.getReader();
-                const decoder = new TextDecoder('utf-8');
-                let aiReply = "";
+                const decoder = new TextDecoder("utf-8");
                 let buffer = "";
 
-                // Buat template message untuk streaming
-                const streamControl = appendMsg('ai', "", true);
-                lucide.createIcons();
-
+                // Looping membaca kepingan stream (chunk)
                 while (true) {
                     const { done, value } = await reader.read();
                     if (done) break;
 
                     buffer += decoder.decode(value, { stream: true });
                     const lines = buffer.split('\n');
-                    
-                    // Simpan baris terakhir yang mungkin belum selesai/terpotong ke dalam buffer
-                    buffer = lines.pop();
+                    buffer = lines.pop(); // Simpan line yang terpotong di buffer
 
                     for (let line of lines) {
                         line = line.trim();
-                        if (!line) continue;
-                        
-                        // PARSING SSE - Potong kata "data: " supaya ga error JSON.parse
                         if (line.startsWith('data:')) {
-                            const dataStr = line.substring(5).trim();
-                            if (dataStr === '[DONE]') continue;
+                            const jsonStr = line.substring(5).trim();
+                            if (jsonStr === '[DONE]') continue;
                             
                             try {
-                                const parsed = JSON.parse(dataStr);
-                                const chunkText = parsed.response || parsed.message || parsed.text || parsed.content || parsed.answer || "";
-                                if (chunkText) {
-                                    aiReply += chunkText;
-                                    streamControl.update(aiReply);
-                                }
+                                const parsed = JSON.parse(jsonStr);
+                                // Tangkap nilai text (bisa response/message/text/content tergantung format API)
+                                const token = parsed.response || parsed.message || parsed.text || parsed.content || "";
+                                aiReply += token;
+                                
+                                // Render langsung perlahan
+                                contentDiv.innerHTML = marked.parse(aiReply);
+                                ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
                             } catch (err) {
-                                // Abaikan chunk yang gagal diparse
+                                // Abaikan chunk yang gagal diparsing sementara (menunggu chunk lengkap)
+                                console.warn("Incomplete chunk JSON skipped:", jsonStr);
                             }
-                        } else if (line.startsWith('{')) {
-                            // Fallback jika API membalas full JSON tanpa prefix data:
-                            try {
-                                const parsed = JSON.parse(line);
-                                const chunkText = parsed.response || parsed.message || parsed.text || parsed.content || parsed.answer || "";
-                                if (chunkText) {
-                                    aiReply += chunkText;
-                                    streamControl.update(aiReply);
-                                }
-                            } catch (err) {}
                         }
                     }
                 }
-
-                // Proses sisa text di buffer kalau ada
-                if (buffer.trim()) {
-                    let finalLine = buffer.trim();
-                    if (finalLine.startsWith('data:')) finalLine = finalLine.substring(5).trim();
-                    try {
-                        const parsed = JSON.parse(finalLine);
-                        const chunkText = parsed.response || parsed.message || parsed.text || parsed.content || parsed.answer || "";
-                        if (chunkText) aiReply += chunkText;
-                    } catch (e) {}
+                
+                // Cek sisa buffer jika ada
+                if (buffer.trim().startsWith('data:')) {
+                    const jsonStr = buffer.substring(5).trim();
+                    if (jsonStr !== '[DONE]') {
+                        try {
+                            const parsed = JSON.parse(jsonStr);
+                            aiReply += parsed.response || parsed.message || parsed.text || parsed.content || "";
+                            contentDiv.innerHTML = marked.parse(aiReply);
+                        } catch(e){}
+                    }
                 }
 
-                if (!aiReply.trim()) aiReply = "⚠️ No response received from server.";
-                
-                // Matikan animasi ngetik, render full markdown + code blocks
-                streamControl.finish(aiReply);
-                saveHistory('ai', aiReply);
+                if (!aiReply.trim()) {
+                    aiReply = "⚠️ Respon kosong dari server API.";
+                    contentDiv.innerHTML = aiReply;
+                }
 
             } catch (error) {
-                appendMsg('ai', "⚠️ **Connection Error:** " + error.message, false);
+                aiReply = "⚠️ **Koneksi Error:** " + error.message;
+                contentDiv.innerHTML = marked.parse(aiReply);
             } finally {
+                // Post-processing setelah stream selesai
+                contentDiv.classList.remove('typing-cursor');
+                formatCodeBlocks(contentDiv);
+                saveHistory('ai', aiReply);
+                
                 isGenerating = false;
                 ui.sendBtn.innerHTML = '<i data-lucide="arrow-up" class="w-5 h-5"></i>';
-                lucide.createIcons();
+                lucide.createIcons({ root: ui.sendBtn });
                 checkInputState();
+                ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
             }
         });
 

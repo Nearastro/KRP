@@ -44,35 +44,27 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
     <style>
-        /* Scrollbar Minimalis */
         ::-webkit-scrollbar { width: 5px; height: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #52525b; }
         
-        /* Cursor Mengetik Elegan */
         .typing-cursor::after { content: ''; display: inline-block; width: 5px; height: 1em; background-color: #ededed; margin-left: 2px; vertical-align: text-bottom; animation: blink 1s step-start infinite; }
         @keyframes blink { 50% { opacity: 0; } }
         
-        /* Markdown Styling Premium */
         .markdown-body { color: #ededed; font-size: 0.95rem; line-height: 1.7; }
         .markdown-body p { margin-bottom: 1rem; }
         .markdown-body ul, .markdown-body ol { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem; color: #d4d4d8; }
         .markdown-body strong { color: #ffffff; font-weight: 600; }
         .markdown-body img { max-width: 100%; border-radius: 0.5rem; margin-top: 0.5rem; border: 1px solid #262626; }
         
-        /* Inline Code */
         .markdown-body code { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 0.85em; padding: 0.2em 0.4em; background: #27272a; color: #e4e4e7; border-radius: 0.3em; border: 1px solid #3f3f46; }
-        
-        /* Block Code Reset */
         .markdown-body pre { margin: 0; }
         .markdown-body pre code { background: transparent; border: none; padding: 0; color: #e4e4e7; }
         
         body { background-color: #0a0a0a; color: #ededed; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        /* Smooth textarea resize */
         textarea { transition: height 0.1s ease; }
     </style>
 </head>
@@ -80,7 +72,6 @@
 
     <!-- Sidebar Minimalis -->
     <aside id="sidebar" class="w-[280px] bg-background border-r border-border flex-shrink-0 flex flex-col transition-transform duration-300 md:relative absolute z-30 h-full -translate-x-full md:translate-x-0">
-        <!-- Logo -->
         <div class="h-14 flex items-center px-5 py-4">
             <span class="text-lg font-semibold tracking-tight text-primary">NearsX.</span>
             <button onclick="toggleSidebar()" class="md:hidden ml-auto text-secondary hover:text-primary transition-colors">
@@ -88,7 +79,6 @@
             </button>
         </div>
 
-        <!-- New Chat Btn -->
         <div class="px-3 pb-3">
             <button onclick="createNewChat()" class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg bg-surface border border-border hover:bg-neutral-800 transition-colors text-sm font-medium text-primary">
                 <span><i class="fa-solid fa-pen-to-square mr-2 opacity-70"></i> New chat</span>
@@ -97,16 +87,11 @@
         </div>
         
         <div class="px-4 pt-2 pb-1 text-[11px] font-semibold text-secondary uppercase tracking-wider">History</div>
-        
-        <!-- History List -->
         <div class="flex-1 overflow-y-auto px-2 space-y-0.5 no-scrollbar" id="chat-history-list"></div>
 
-        <!-- User Profile -->
         <div class="p-4 border-t border-border flex justify-between items-center bg-background">
             <div class="flex items-center gap-3">
-                <div class="w-7 h-7 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center text-xs">
-                    US
-                </div>
+                <div class="w-7 h-7 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center text-xs">US</div>
                 <span class="font-medium text-sm text-primary">Workspace</span>
             </div>
             <button onclick="clearAllHistory()" class="text-secondary hover:text-red-400 transition-colors" title="Clear History">
@@ -115,13 +100,10 @@
         </div>
     </aside>
 
-    <!-- Overlay Mobile -->
     <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-20 hidden md:hidden transition-opacity"></div>
 
-    <!-- Main Content -->
     <main class="flex-1 flex flex-col h-full relative w-full bg-background">
         
-        <!-- Header -->
         <header class="h-14 flex items-center justify-between px-4 sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border/50">
             <div class="flex items-center gap-3">
                 <button onclick="toggleSidebar()" class="md:hidden text-secondary hover:text-primary transition-colors">
@@ -129,27 +111,22 @@
                 </button>
                 <div class="relative">
                     <select id="model-selector" class="appearance-none bg-transparent hover:bg-surface border border-transparent hover:border-border text-sm rounded-lg pl-3 pr-8 py-1.5 outline-none text-primary cursor-pointer transition-colors font-medium">
-                        <!-- Options via JS -->
                     </select>
                     <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-[10px]"></i>
                 </div>
             </div>
         </header>
 
-        <!-- Chat Container -->
         <div id="chat-container" class="flex-1 overflow-y-auto px-4 md:px-0 py-6 space-y-8 pb-48 scroll-smooth flex flex-col items-center">
-            
-            <!-- Welcome Screen Minimalis -->
             <div id="welcome-screen" class="h-full w-full max-w-3xl flex flex-col items-center justify-center text-center animate-fade-in mt-10">
                 <div class="w-16 h-16 rounded-2xl bg-surface border border-border flex items-center justify-center mb-6 shadow-sm">
                     <i class="fa-solid fa-layer-group text-2xl text-secondary"></i>
                 </div>
                 <h1 class="text-3xl font-semibold mb-3 tracking-tight text-primary">How can I help?</h1>
                 <p class="text-secondary text-sm max-w-sm">
-                    Upload documents, write code, or start a conversation. 
+                    Upload documents, write code, or start a conversation.
                 </p>
                 
-                <!-- Simple Suggestions -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-10 w-full max-w-xl">
                     <button onclick="setSuggestion('Bantu saya merapikan kode Python ini')" class="p-4 rounded-xl border border-border bg-background hover:bg-surface transition-colors text-left flex flex-col gap-1.5 group shadow-sm">
                         <span class="text-primary text-sm font-medium"><i class="fa-solid fa-code text-secondary mr-2"></i>Code Review</span>
@@ -161,28 +138,21 @@
                     </button>
                 </div>
             </div>
-            
         </div>
 
-        <!-- Input Area Elegan -->
         <div class="absolute bottom-0 w-full bg-gradient-to-t from-background via-background to-transparent pt-10 pb-6 px-4 flex justify-center z-10">
             <form id="chat-form" class="w-full max-w-3xl relative">
                 <div class="relative flex flex-col bg-surface rounded-2xl border border-border shadow-lg transition-colors focus-within:border-neutral-600 focus-within:ring-1 focus-within:ring-neutral-600">
-                    
-                    <!-- File Preview (Integrated cleanly) -->
                     <div id="file-preview-container" class="flex gap-2 px-3 pt-3 overflow-x-auto hidden border-b border-border/50 pb-2"></div>
                     
                     <div class="flex items-end relative min-h-[56px]">
-                        <!-- Attachment Button -->
                         <label for="file-upload" class="p-3.5 ml-1 text-secondary hover:text-primary cursor-pointer transition-colors" title="Attach Files">
                             <i class="fa-solid fa-paperclip text-lg"></i>
                         </label>
                         <input type="file" id="file-upload" class="hidden" multiple accept="image/*,.pdf,.txt,.json,.csv,.js,.py,.html">
                         
-                        <!-- Textarea -->
                         <textarea id="user-input" rows="1" class="w-full bg-transparent text-primary py-4 px-2 resize-none outline-none max-h-48 text-[15px] placeholder-secondary leading-relaxed" placeholder="Message NearsX..."></textarea>
                         
-                        <!-- Send Button -->
                         <button type="submit" id="send-btn" class="p-2 mb-2 mr-2 rounded-xl bg-primary text-background hover:bg-white transition-all duration-200 disabled:opacity-30 disabled:bg-surface disabled:text-secondary disabled:border disabled:border-border flex items-center justify-center w-9 h-9" disabled>
                             <i class="fa-solid fa-arrow-up text-sm"></i>
                         </button>
@@ -196,8 +166,7 @@
     </main>
 
     <script>
-        // === KONFIGURASI ===
-        // GANTI INI DENGAN IP VPS KAMU BESERTA PORTNYA
+        // === GANTI DENGAN IP VPS KAMU + PORT 8080 ===
         const WORKER_URL = "http://116.212.73.233:8080/"; 
         
         const MODELS = [
@@ -313,7 +282,6 @@
             }
         }
 
-        // --- WRAPPER KODE ELEGAN & COPY BUTTON ---
         function formatCodeBlocks(container) {
             const pres = container.querySelectorAll('pre');
             pres.forEach(pre => {
@@ -355,13 +323,11 @@
             });
         }
 
-        // --- RENDER CHAT BUBBLE ELEGAN ---
         function appendMsg(role, content, isTyping = false, attachments = []) {
             ui.welcomeScreen.style.display = 'none';
             
             const div = document.createElement('div');
-            // User rata kanan (elegan), AI rata kiri
-            div.className = `flex w-full w-full max-w-3xl animate-fade-in mb-6 ${role === 'user' ? 'justify-end' : 'justify-start'}`;
+            div.className = `flex w-full max-w-3xl animate-fade-in mb-6 ${role === 'user' ? 'justify-end' : 'justify-start'}`;
             
             let attachmentHTML = '';
             if (attachments && attachments.length > 0) {
@@ -379,15 +345,12 @@
             const bubble = document.createElement('div');
             
             if (role === 'user') {
-                // Style bubble User (Minimalist Surface color)
                 bubble.className = 'px-5 py-3 rounded-2xl rounded-tr-sm bg-surface border border-border text-primary max-w-[85%] text-[15px] leading-relaxed shadow-sm';
                 bubble.innerHTML = attachmentHTML + (content ? `<div>${content}</div>` : '');
                 div.appendChild(bubble);
             } else {
-                // Style AI (Transparent background, rich markdown)
                 bubble.className = 'text-primary markdown-body w-full max-w-full overflow-hidden flex gap-4';
                 
-                // Icon AI minimalis
                 const avatar = document.createElement('div');
                 avatar.className = 'w-8 h-8 rounded-full border border-border flex items-center justify-center flex-shrink-0 mt-0.5 bg-background shadow-sm';
                 avatar.innerHTML = '<i class="fa-solid fa-sparkles text-[11px] text-primary"></i>';
@@ -431,7 +394,6 @@
             ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
         }
 
-        // --- FILE HANDLING UI (CLEAN PREVIEW) ---
         ui.fileInput.addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
             if (selectedFiles.length + files.length > 5) {
@@ -484,7 +446,6 @@
             renderFilePreviews();
         }
 
-        // --- INPUT UX ---
         function autoResizeTextarea() {
             ui.userInput.style.height = 'auto';
             let newHeight = ui.userInput.scrollHeight;
@@ -509,7 +470,7 @@
         });
         ui.userInput.addEventListener('input', () => { autoResizeTextarea(); checkInputState(); });
 
-        // --- SUBMIT REQUEST ---
+        // --- PENANGANAN RESPONSE STREAM / TEXT / JSON (FIX ERROR UNEXPECTED TOKEN) ---
         ui.chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             if (isGenerating) return;
@@ -536,7 +497,6 @@
             ui.sendBtn.setAttribute('disabled', 'true');
             ui.sendBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin text-sm"></i>';
 
-            // Loading state minimalist
             const loadingDiv = document.createElement('div');
             loadingDiv.className = "flex w-full max-w-3xl animate-fade-in mb-6 justify-start";
             loadingDiv.innerHTML = `
@@ -574,23 +534,58 @@
                     });
                 }
 
-                // Call Proxy VPS
                 const response = await fetch(WORKER_URL, fetchOptions);
-                const data = await response.json();
+                const rawText = await response.text();
                 
                 ui.chatContainer.removeChild(loadingDiv);
                 
-                const aiReply = data.response || data.message || data.text || data.answer || JSON.stringify(data);
+                let aiReply = "";
+
+                // Ekstraksi data jika formatnya SSE / Streaming Text (data: {...})
+                if (rawText.includes('data:')) {
+                    const lines = rawText.split('\n');
+                    for (let line of lines) {
+                        line = line.trim();
+                        if (line.startsWith('data:')) {
+                            const jsonStr = line.replace(/^data:\s*/, '');
+                            if (jsonStr === '[DONE]') continue;
+                            try {
+                                const parsed = JSON.parse(jsonStr);
+                                if (parsed.response) aiReply += parsed.response;
+                                else if (parsed.message) aiReply += parsed.message;
+                                else if (parsed.text) aiReply += parsed.text;
+                                else if (parsed.content) aiReply += parsed.content;
+                            } catch (err) {
+                                // Jika potongan bukan JSON valid, ambil mentahnya
+                                aiReply += jsonStr;
+                            }
+                        }
+                    }
+                } 
+
+                // Parsing jika formatnya JSON murni
+                if (!aiReply) {
+                    try {
+                        const parsed = JSON.parse(rawText);
+                        aiReply = parsed.response || parsed.message || parsed.text || parsed.answer || JSON.stringify(parsed);
+                    } catch (err) {
+                        // Jika teks biasa
+                        aiReply = rawText;
+                    }
+                }
+
+                if (!aiReply.trim()) aiReply = "⚠️ Respon kosong dari server API.";
+
                 appendMsg('ai', aiReply, true);
                 saveHistory('ai', aiReply);
 
             } catch (error) {
                 ui.chatContainer.removeChild(loadingDiv);
-                appendMsg('ai', "⚠️ **Connection Error:** Failed to reach proxy server. Make sure the VPS is running and IP is correct.", false);
+                appendMsg('ai', "⚠️ **Connection Error:** " + error.message, false);
             } finally {
                 isGenerating = false;
                 ui.sendBtn.innerHTML = '<i class="fa-solid fa-arrow-up text-sm"></i>';
-                checkInputState(); // Re-check incase user typed during generation
+                checkInputState();
             }
         });
 

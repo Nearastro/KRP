@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NearsX AI - Ultimate (With Vision & Copy Code)</title>
+    <title>NearsX - Workspace</title>
     
+    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -15,22 +18,19 @@
             theme: { 
                 extend: { 
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        background: '#0a0a0a',
+                        surface: '#171717',
+                        border: '#262626',
+                        primary: '#ededed',
+                        secondary: '#a1a1aa'
+                    },
                     animation: {
-                        'gradient': 'gradient 8s linear infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+                        'fade-in': 'fadeIn 0.4s ease-out forwards',
                     },
                     keyframes: {
-                        gradient: {
-                            '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
-                            '50%': { 'background-size': '200% 200%', 'background-position': 'right center' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-15px)' },
-                        },
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
                         }
                     }
@@ -38,147 +38,173 @@
             }
         }
     </script>
+    
+    <!-- FontAwesome & Marked -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
     <style>
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        /* Scrollbar Minimalis */
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
+        ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #52525b; }
         
-        .typing-cursor::after { content: '▋'; animation: blink 1s step-start infinite; color: #a78bfa; text-shadow: 0 0 8px #a78bfa; }
+        /* Cursor Mengetik Elegan */
+        .typing-cursor::after { content: ''; display: inline-block; width: 5px; height: 1em; background-color: #ededed; margin-left: 2px; vertical-align: text-bottom; animation: blink 1s step-start infinite; }
         @keyframes blink { 50% { opacity: 0; } }
         
-        /* Markdown Beautification */
-        .markdown-body p { margin-bottom: 0.75rem; line-height: 1.6; }
-        .markdown-body ul, .markdown-body ol { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 0.75rem; }
-        .markdown-body img { max-width: 100%; border-radius: 0.5rem; margin-top: 0.5rem; }
+        /* Markdown Styling Premium */
+        .markdown-body { color: #ededed; font-size: 0.95rem; line-height: 1.7; }
+        .markdown-body p { margin-bottom: 1rem; }
+        .markdown-body ul, .markdown-body ol { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem; color: #d4d4d8; }
+        .markdown-body strong { color: #ffffff; font-weight: 600; }
+        .markdown-body img { max-width: 100%; border-radius: 0.5rem; margin-top: 0.5rem; border: 1px solid #262626; }
         
-        /* Kode sebaris (Inline code) */
-        .markdown-body code { font-family: ui-monospace, monospace; color: #c084fc; font-size: 0.9em; padding: 0.2em 0.4em; background: rgba(255,255,255,0.05); border-radius: 0.3em; }
+        /* Inline Code */
+        .markdown-body code { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 0.85em; padding: 0.2em 0.4em; background: #27272a; color: #e4e4e7; border-radius: 0.3em; border: 1px solid #3f3f46; }
         
-        /* Pre-block (Block code) override bawaan agar bisa diatur custom wrapper JS */
-        .markdown-body pre { overflow-x: auto; padding: 1rem; }
-        .markdown-body pre code { color: #e2e8f0; background: transparent; padding: 0; }
+        /* Block Code Reset */
+        .markdown-body pre { margin: 0; }
+        .markdown-body pre code { background: transparent; border: none; padding: 0; color: #e4e4e7; }
         
-        body {
-            background: radial-gradient(circle at 15% 50%, rgba(20, 10, 40, 1), transparent 50%),
-                        radial-gradient(circle at 85% 30%, rgba(15, 20, 50, 1), transparent 50%);
-            background-color: #050505;
-        }
+        body { background-color: #0a0a0a; color: #ededed; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Smooth textarea resize */
+        textarea { transition: height 0.1s ease; }
     </style>
 </head>
-<body class="text-white h-screen flex overflow-hidden font-sans antialiased selection:bg-purple-500/30 selection:text-purple-200">
+<body class="h-screen flex overflow-hidden font-sans antialiased selection:bg-neutral-700 selection:text-white">
 
-    <aside id="sidebar" class="w-72 bg-black/40 backdrop-blur-xl border-r border-white/10 flex-shrink-0 flex flex-col transition-all duration-500 md:relative absolute z-30 h-full -translate-x-full md:translate-x-0 shadow-2xl">
-        <div class="h-16 flex items-center px-6 border-b border-white/5">
-            <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400 animate-gradient">
-                NearsX<span class="text-white">AI</span>
-            </span>
-            <button onclick="toggleSidebar()" class="md:hidden ml-auto text-gray-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-xl"></i>
+    <!-- Sidebar Minimalis -->
+    <aside id="sidebar" class="w-[280px] bg-background border-r border-border flex-shrink-0 flex flex-col transition-transform duration-300 md:relative absolute z-30 h-full -translate-x-full md:translate-x-0">
+        <!-- Logo -->
+        <div class="h-14 flex items-center px-5 py-4">
+            <span class="text-lg font-semibold tracking-tight text-primary">NearsX.</span>
+            <button onclick="toggleSidebar()" class="md:hidden ml-auto text-secondary hover:text-primary transition-colors">
+                <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
 
-        <div class="p-4">
-            <button onclick="createNewChat()" class="w-full flex items-center justify-center gap-3 p-3 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 transition-all duration-300 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_25px_rgba(139,92,246,0.5)] text-white font-medium group">
-                <i class="fa-solid fa-plus group-hover:rotate-90 transition-transform duration-300"></i> New Chat
+        <!-- New Chat Btn -->
+        <div class="px-3 pb-3">
+            <button onclick="createNewChat()" class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg bg-surface border border-border hover:bg-neutral-800 transition-colors text-sm font-medium text-primary">
+                <span><i class="fa-solid fa-pen-to-square mr-2 opacity-70"></i> New chat</span>
+                <i class="fa-solid fa-plus text-xs opacity-50"></i>
             </button>
         </div>
         
-        <div class="px-4 pb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Recent Chats</div>
-        <div class="flex-1 overflow-y-auto px-3 space-y-1 no-scrollbar" id="chat-history-list"></div>
+        <div class="px-4 pt-2 pb-1 text-[11px] font-semibold text-secondary uppercase tracking-wider">History</div>
+        
+        <!-- History List -->
+        <div class="flex-1 overflow-y-auto px-2 space-y-0.5 no-scrollbar" id="chat-history-list"></div>
 
-        <div class="p-4 border-t border-white/10 bg-white/5 flex justify-between items-center backdrop-blur-md">
+        <!-- User Profile -->
+        <div class="p-4 border-t border-border flex justify-between items-center bg-background">
             <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-500 to-blue-500 flex items-center justify-center shadow-lg"><i class="fa-solid fa-user text-sm"></i></div>
-                <span class="font-medium text-sm text-gray-200">NearsX User</span>
+                <div class="w-7 h-7 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center text-xs">
+                    US
+                </div>
+                <span class="font-medium text-sm text-primary">Workspace</span>
             </div>
-            <button onclick="clearAllHistory()" class="text-gray-400 hover:text-red-400 transition-colors p-2 rounded-lg hover:bg-white/10" title="Clear All History"><i class="fa-solid fa-trash-can"></i></button>
+            <button onclick="clearAllHistory()" class="text-secondary hover:text-red-400 transition-colors" title="Clear History">
+                <i class="fa-solid fa-trash-can text-sm"></i>
+            </button>
         </div>
     </aside>
 
-    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-20 hidden md:hidden transition-opacity"></div>
+    <!-- Overlay Mobile -->
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-20 hidden md:hidden transition-opacity"></div>
 
-    <main class="flex-1 flex flex-col h-full relative w-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-opacity-10">
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-full relative w-full bg-background">
         
-        <header class="h-16 flex items-center justify-between px-4 md:px-8 border-b border-white/5 bg-black/20 backdrop-blur-md sticky top-0 z-10">
-            <button onclick="toggleSidebar()" class="md:hidden text-gray-300 hover:text-white p-2 rounded-lg bg-white/5 border border-white/10">
-                <i class="fa-solid fa-bars-staggered"></i>
-            </button>
-            <div class="mx-auto md:mx-0 flex flex-col items-center md:items-start">
-                <span class="md:hidden font-bold text-lg bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-indigo-400">NearsX</span>
-            </div>
+        <!-- Header -->
+        <header class="h-14 flex items-center justify-between px-4 sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border/50">
             <div class="flex items-center gap-3">
-                <div class="relative group">
-                    <div class="absolute -inset-0.5 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-lg blur opacity-30 group-hover:opacity-70 transition duration-300"></div>
-                    <select id="model-selector" class="relative bg-black/50 border border-white/10 text-sm rounded-lg px-4 py-2 outline-none text-gray-200 cursor-pointer backdrop-blur-md appearance-none hover:bg-black/70 transition-all font-medium pr-8 w-48 truncate"></select>
-                    <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-xs"></i>
+                <button onclick="toggleSidebar()" class="md:hidden text-secondary hover:text-primary transition-colors">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="relative">
+                    <select id="model-selector" class="appearance-none bg-transparent hover:bg-surface border border-transparent hover:border-border text-sm rounded-lg pl-3 pr-8 py-1.5 outline-none text-primary cursor-pointer transition-colors font-medium">
+                        <!-- Options via JS -->
+                    </select>
+                    <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-[10px]"></i>
                 </div>
             </div>
         </header>
 
-        <div id="chat-container" class="flex-1 overflow-y-auto p-4 md:p-8 space-y-8 pb-48 scroll-smooth">
-            <div id="welcome-screen" class="h-full flex flex-col items-center justify-center text-center animate-fade-in-up">
-                <div class="relative mb-8 animate-float">
-                    <div class="absolute inset-0 bg-violet-600 rounded-full blur-3xl opacity-20"></div>
-                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=NearsX&backgroundColor=transparent" alt="AI Bot" class="w-32 h-32 relative z-10 drop-shadow-[0_0_15px_rgba(139,92,246,0.5)]">
+        <!-- Chat Container -->
+        <div id="chat-container" class="flex-1 overflow-y-auto px-4 md:px-0 py-6 space-y-8 pb-48 scroll-smooth flex flex-col items-center">
+            
+            <!-- Welcome Screen Minimalis -->
+            <div id="welcome-screen" class="h-full w-full max-w-3xl flex flex-col items-center justify-center text-center animate-fade-in mt-10">
+                <div class="w-16 h-16 rounded-2xl bg-surface border border-border flex items-center justify-center mb-6 shadow-sm">
+                    <i class="fa-solid fa-layer-group text-2xl text-secondary"></i>
                 </div>
-                <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-                    Welcome to <span class="bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400 animate-gradient">NearsX AI</span>
-                </h1>
-                <p class="text-gray-400 max-w-md text-sm md:text-base leading-relaxed">
-                    Tanyakan apapun, analisis gambar, generate ide, atau sekadar ngobrol. Masa depan ada di tanganmu.
+                <h1 class="text-3xl font-semibold mb-3 tracking-tight text-primary">How can I help?</h1>
+                <p class="text-secondary text-sm max-w-sm">
+                    Upload documents, write code, or start a conversation. 
                 </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-10 max-w-2xl w-full">
-                    <button onclick="setSuggestion('Buatkan script HTML & CSS untuk tombol gradient')" class="p-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all text-left flex flex-col gap-1 group">
-                        <span class="text-violet-400 text-sm font-semibold group-hover:text-violet-300"><i class="fa-solid fa-code mr-2"></i>Code</span>
-                        <span class="text-gray-300 text-sm">Buatkan script HTML & CSS untuk tombol gradient</span>
+                
+                <!-- Simple Suggestions -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-10 w-full max-w-xl">
+                    <button onclick="setSuggestion('Bantu saya merapikan kode Python ini')" class="p-4 rounded-xl border border-border bg-background hover:bg-surface transition-colors text-left flex flex-col gap-1.5 group shadow-sm">
+                        <span class="text-primary text-sm font-medium"><i class="fa-solid fa-code text-secondary mr-2"></i>Code Review</span>
+                        <span class="text-secondary text-xs">Bantu saya merapikan kode Python ini</span>
                     </button>
-                    <button onclick="setSuggestion('Jelaskan teori Quantum dengan bahasa sederhana')" class="p-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all text-left flex flex-col gap-1 group">
-                        <span class="text-fuchsia-400 text-sm font-semibold group-hover:text-fuchsia-300"><i class="fa-solid fa-atom mr-2"></i>Learn</span>
-                        <span class="text-gray-300 text-sm">Jelaskan teori Quantum dengan sederhana</span>
+                    <button onclick="setSuggestion('Tuliskan draft email profesional untuk klien')" class="p-4 rounded-xl border border-border bg-background hover:bg-surface transition-colors text-left flex flex-col gap-1.5 group shadow-sm">
+                        <span class="text-primary text-sm font-medium"><i class="fa-regular fa-envelope text-secondary mr-2"></i>Draft Email</span>
+                        <span class="text-secondary text-xs">Tuliskan draft email profesional untuk klien</span>
                     </button>
                 </div>
             </div>
+            
         </div>
 
-        <div class="absolute bottom-0 w-full bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent pt-12 pb-6 px-4 md:px-8 z-10">
-            <form id="chat-form" class="max-w-4xl mx-auto relative group">
-                <div class="absolute -inset-1 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-indigo-600 rounded-2xl blur opacity-25 group-focus-within:opacity-60 transition duration-500"></div>
-                
-                <div class="relative flex flex-col bg-black/60 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden transition-colors">
+        <!-- Input Area Elegan -->
+        <div class="absolute bottom-0 w-full bg-gradient-to-t from-background via-background to-transparent pt-10 pb-6 px-4 flex justify-center z-10">
+            <form id="chat-form" class="w-full max-w-3xl relative">
+                <div class="relative flex flex-col bg-surface rounded-2xl border border-border shadow-lg transition-colors focus-within:border-neutral-600 focus-within:ring-1 focus-within:ring-neutral-600">
                     
-                    <div id="file-preview-container" class="flex gap-3 p-3 overflow-x-auto hidden border-b border-white/5 bg-black/30"></div>
+                    <!-- File Preview (Integrated cleanly) -->
+                    <div id="file-preview-container" class="flex gap-2 px-3 pt-3 overflow-x-auto hidden border-b border-border/50 pb-2"></div>
                     
-                    <div class="flex items-end relative">
-                        <label for="file-upload" class="p-4 md:p-5 text-gray-400 hover:text-violet-400 cursor-pointer transition-colors" title="Attach Files (Max 9)">
-                            <i class="fa-solid fa-paperclip text-xl"></i>
+                    <div class="flex items-end relative min-h-[56px]">
+                        <!-- Attachment Button -->
+                        <label for="file-upload" class="p-3.5 ml-1 text-secondary hover:text-primary cursor-pointer transition-colors" title="Attach Files">
+                            <i class="fa-solid fa-paperclip text-lg"></i>
                         </label>
-                        <input type="file" id="file-upload" class="hidden" multiple accept="image/*,.pdf,.txt,.json,.csv">
+                        <input type="file" id="file-upload" class="hidden" multiple accept="image/*,.pdf,.txt,.json,.csv,.js,.py,.html">
                         
-                        <textarea id="user-input" rows="1" class="w-full bg-transparent text-gray-100 p-4 md:p-5 pl-0 pr-14 resize-none outline-none max-h-40 font-medium placeholder-gray-500" placeholder="Ketik pesan Anda di sini..."></textarea>
+                        <!-- Textarea -->
+                        <textarea id="user-input" rows="1" class="w-full bg-transparent text-primary py-4 px-2 resize-none outline-none max-h-48 text-[15px] placeholder-secondary leading-relaxed" placeholder="Message NearsX..."></textarea>
                         
-                        <button type="submit" id="send-btn" class="absolute right-3 bottom-3 p-3 bg-white/5 text-gray-300 hover:text-white hover:bg-violet-600 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:hover:bg-white/5 disabled:hover:text-gray-300 flex items-center justify-center">
-                            <i class="fa-solid fa-paper-plane text-lg"></i>
+                        <!-- Send Button -->
+                        <button type="submit" id="send-btn" class="p-2 mb-2 mr-2 rounded-xl bg-primary text-background hover:bg-white transition-all duration-200 disabled:opacity-30 disabled:bg-surface disabled:text-secondary disabled:border disabled:border-border flex items-center justify-center w-9 h-9" disabled>
+                            <i class="fa-solid fa-arrow-up text-sm"></i>
                         </button>
                     </div>
                 </div>
+                <div class="text-center mt-3">
+                    <span class="text-[10px] text-neutral-500 font-medium">NearsX AI can make mistakes. Consider verifying important information.</span>
+                </div>
             </form>
-            <p class="text-[11px] text-center text-gray-500 mt-4 tracking-wide font-medium">NearsX AI didukung oleh model canggih. Hasil mungkin tidak selalu 100% akurat.</p>
         </div>
     </main>
 
     <script>
-        const WORKER_URL = "https://aged-bonus-fba3.desta4254.workers.dev/"; 
+        // === KONFIGURASI ===
+        // GANTI INI DENGAN IP VPS KAMU BESERTA PORTNYA
+        const WORKER_URL = "http://116.212.73.233:8080/"; 
+        
         const MODELS = [
-            "claude-fable-5", "claude-haiku-4.5", "claude-opus-4.8", "claude-sonnet-5", 
+            "gpt-4o", "gpt-5.5", "claude-opus-4.8", "claude-sonnet-5", 
             "deepseek-r1", "deepseek-v3", "deepseek-v4-flash", "gemini-2.0-flash", 
-            "gemini-2.5-pro", "gpt-4o", "gpt-5.5", "gpt-o3-mini", "grok-4.6"
-        ]; // Silakan lengkapi array ini seperti sebelumnya
+            "gemini-2.5-pro", "grok-4.6"
+        ];
         
         let chatHistory = JSON.parse(localStorage.getItem('nearsx_history')) || [];
         let currentConvId = null;
@@ -201,7 +227,7 @@
 
         function init() {
             MODELS.forEach(m => {
-                const opt = new Option(m.toUpperCase(), m);
+                const opt = new Option(m, m);
                 if(m === 'gpt-4o') opt.selected = true;
                 ui.modelSelector.add(opt);
             });
@@ -220,6 +246,7 @@
             ui.userInput.value = text;
             ui.userInput.focus();
             autoResizeTextarea();
+            checkInputState();
         }
 
         function createNewChat() {
@@ -249,14 +276,13 @@
             chatHistory.forEach(conv => {
                 const isActive = conv.id === currentConvId;
                 const div = document.createElement('div');
-                div.className = `group flex justify-between items-center p-3 rounded-xl cursor-pointer text-sm transition-all duration-200 border border-transparent ${isActive ? 'bg-white/10 border-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'}`;
+                div.className = `group flex justify-between items-center p-2.5 rounded-lg cursor-pointer text-sm transition-colors ${isActive ? 'bg-surface text-primary' : 'text-secondary hover:bg-neutral-800 hover:text-primary'}`;
                 div.innerHTML = `
-                    <div class="flex items-center gap-3 overflow-hidden" onclick="loadConv('${conv.id}')">
-                        <i class="fa-regular fa-message ${isActive ? 'text-violet-400' : 'text-gray-500 group-hover:text-violet-400'} transition-colors"></i>
+                    <div class="flex items-center gap-3 overflow-hidden w-full" onclick="loadConv('${conv.id}')">
                         <span class="truncate font-medium">${conv.title}</span>
                     </div>
-                    <button class="opacity-0 group-hover:opacity-100 text-gray-500 hover:text-red-400 transition-all p-1" onclick="deleteChat('${conv.id}', event)">
-                        <i class="fa-solid fa-trash-can text-xs"></i>
+                    <button class="opacity-0 group-hover:opacity-100 text-neutral-500 hover:text-red-400 transition-all ml-2" onclick="deleteChat('${conv.id}', event)">
+                        <i class="fa-solid fa-trash-can text-[11px]"></i>
                     </button>
                 `;
                 ui.historyList.appendChild(div);
@@ -281,41 +307,40 @@
         }
 
         function clearAllHistory() {
-            if(confirm('Hapus semua history chat?')) {
+            if(confirm('Clear all conversation history?')) {
                 chatHistory = []; localStorage.removeItem('nearsx_history');
                 createNewChat(); renderHistory();
             }
         }
 
-        // --- CUSTOM RENDERER UNTUK KODE BLOK ---
+        // --- WRAPPER KODE ELEGAN & COPY BUTTON ---
         function formatCodeBlocks(container) {
             const pres = container.querySelectorAll('pre');
             pres.forEach(pre => {
-                // Cek agar tidak terbungkus 2 kali
                 if (pre.parentNode.classList.contains('code-wrapper')) return;
                 
                 const codeNode = pre.querySelector('code');
-                const lang = codeNode && codeNode.className ? codeNode.className.replace('language-', '') : 'Code';
+                const lang = codeNode && codeNode.className ? codeNode.className.replace('language-', '') : 'text';
                 const codeText = codeNode ? codeNode.innerText : pre.innerText;
 
                 const wrapper = document.createElement('div');
-                wrapper.className = 'code-wrapper my-5 rounded-xl overflow-hidden bg-[#0d1117] border border-white/10 shadow-lg';
+                wrapper.className = 'code-wrapper my-4 rounded-xl overflow-hidden bg-[#0d0d0d] border border-border shadow-sm';
                 
                 const header = document.createElement('div');
-                header.className = 'flex justify-between items-center px-4 py-2 bg-[#161b22] text-xs text-gray-400 font-mono border-b border-white/5';
+                header.className = 'flex justify-between items-center px-4 py-2 bg-[#171717] border-b border-border text-xs text-secondary font-mono';
                 header.innerHTML = `
-                    <span class="capitalize font-semibold">${lang}</span>
-                    <button class="copy-btn flex items-center gap-1.5 hover:text-white transition-colors" title="Copy code">
-                        <i class="fa-regular fa-copy"></i> <span>Copy</span>
+                    <span class="lowercase">${lang}</span>
+                    <button class="copy-btn flex items-center gap-1.5 hover:text-primary transition-colors" title="Copy code">
+                        <i class="fa-regular fa-clone"></i> <span>Copy</span>
                     </button>
                 `;
                 
                 const copyBtn = header.querySelector('.copy-btn');
                 copyBtn.addEventListener('click', () => {
                     navigator.clipboard.writeText(codeText).then(() => {
-                        copyBtn.innerHTML = '<i class="fa-solid fa-check text-green-400"></i> <span class="text-green-400">Copied!</span>';
+                        copyBtn.innerHTML = '<i class="fa-solid fa-check text-green-500"></i> <span class="text-green-500">Copied</span>';
                         setTimeout(() => {
-                            copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> <span>Copy</span>';
+                            copyBtn.innerHTML = '<i class="fa-regular fa-clone"></i> <span>Copy</span>';
                         }, 2000);
                     });
                 });
@@ -323,83 +348,94 @@
                 pre.parentNode.insertBefore(wrapper, pre);
                 wrapper.appendChild(header);
                 
-                // Hapus style bawaan pre agar masuk ke dalam wrapper dengan rapi
-                pre.style.margin = '0';
-                pre.style.background = 'transparent';
-                pre.style.border = 'none';
-                
-                wrapper.appendChild(pre);
+                const codeContent = document.createElement('div');
+                codeContent.className = 'p-4 overflow-x-auto text-[13px] leading-relaxed font-mono';
+                codeContent.appendChild(pre);
+                wrapper.appendChild(codeContent);
             });
         }
 
+        // --- RENDER CHAT BUBBLE ELEGAN ---
         function appendMsg(role, content, isTyping = false, attachments = []) {
             ui.welcomeScreen.style.display = 'none';
+            
             const div = document.createElement('div');
-            div.className = `flex gap-4 ${role === 'user' ? 'justify-end' : 'justify-start'} max-w-4xl mx-auto w-full animate-fade-in-up`;
-            
-            const avatar = role === 'ai' ? `<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-fuchsia-600 flex-shrink-0 flex items-center justify-center shadow-[0_0_15px_rgba(139,92,246,0.4)] border border-white/20 z-10 mt-1"><i class="fa-solid fa-robot text-white"></i></div>` : '';
-            const bubbleWrap = document.createElement('div');
-            bubbleWrap.className = `flex gap-4 max-w-full ${role === 'user' ? 'flex-row-reverse' : 'flex-row'}`;
-            
-            const bubble = document.createElement('div');
+            // User rata kanan (elegan), AI rata kiri
+            div.className = `flex w-full w-full max-w-3xl animate-fade-in mb-6 ${role === 'user' ? 'justify-end' : 'justify-start'}`;
             
             let attachmentHTML = '';
             if (attachments && attachments.length > 0) {
                 attachmentHTML = `<div class="flex flex-wrap gap-2 mb-2">`;
                 attachments.forEach(att => {
-                    if (att.type.startsWith('image/')) {
-                        attachmentHTML += `<img src="${att.url}" class="h-20 w-auto rounded-lg border border-white/20 object-cover">`;
+                    if (att.type && att.type.startsWith('image/')) {
+                        attachmentHTML += `<img src="${att.url}" class="h-24 w-auto rounded-lg border border-border object-cover">`;
                     } else {
-                        attachmentHTML += `<div class="flex items-center gap-2 bg-black/30 p-2 rounded-lg border border-white/20 text-xs"><i class="fa-solid fa-file"></i> ${att.name}</div>`;
+                        attachmentHTML += `<div class="flex items-center gap-2 bg-surface px-3 py-2 rounded-lg border border-border text-xs font-medium text-primary"><i class="fa-solid fa-file-lines text-secondary"></i> ${att.name}</div>`;
                     }
                 });
                 attachmentHTML += `</div>`;
             }
 
+            const bubble = document.createElement('div');
+            
             if (role === 'user') {
-                bubble.className = 'p-4 rounded-2xl rounded-tr-sm bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-lg max-w-[85%] border border-white/10 font-medium whitespace-pre-wrap';
+                // Style bubble User (Minimalist Surface color)
+                bubble.className = 'px-5 py-3 rounded-2xl rounded-tr-sm bg-surface border border-border text-primary max-w-[85%] text-[15px] leading-relaxed shadow-sm';
                 bubble.innerHTML = attachmentHTML + (content ? `<div>${content}</div>` : '');
+                div.appendChild(bubble);
             } else {
-                bubble.className = 'p-5 rounded-2xl rounded-tl-sm bg-black/40 backdrop-blur-md border border-white/10 text-gray-100 markdown-body w-full shadow-xl max-w-full overflow-hidden';
+                // Style AI (Transparent background, rich markdown)
+                bubble.className = 'text-primary markdown-body w-full max-w-full overflow-hidden flex gap-4';
                 
+                // Icon AI minimalis
+                const avatar = document.createElement('div');
+                avatar.className = 'w-8 h-8 rounded-full border border-border flex items-center justify-center flex-shrink-0 mt-0.5 bg-background shadow-sm';
+                avatar.innerHTML = '<i class="fa-solid fa-sparkles text-[11px] text-primary"></i>';
+                
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'flex-1 min-w-0';
+
                 if (isTyping) {
-                    bubble.classList.add('typing-cursor');
-                    bubbleWrap.innerHTML = avatar;
-                    bubbleWrap.appendChild(bubble);
-                    div.appendChild(bubbleWrap);
+                    contentDiv.classList.add('typing-cursor');
+                    bubble.appendChild(avatar);
+                    bubble.appendChild(contentDiv);
+                    div.appendChild(bubble);
                     ui.chatContainer.appendChild(div);
                     
                     let i = 0;
-                    const speed = content.length > 500 ? 2 : 5; 
+                    const speed = content.length > 500 ? 1 : 4; 
                     const interval = setInterval(() => {
                         if (i < content.length) {
-                            bubble.innerHTML = marked.parse(content.substring(0, i + 3));
+                            contentDiv.innerHTML = marked.parse(content.substring(0, i + 3));
                             ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight; 
                             i += 3;
                         } else {
                             clearInterval(interval);
-                            bubble.classList.remove('typing-cursor');
-                            bubble.innerHTML = marked.parse(content);
-                            formatCodeBlocks(bubble); // Terapkan pembungkus kode setelah selesai mengetik
+                            contentDiv.classList.remove('typing-cursor');
+                            contentDiv.innerHTML = marked.parse(content);
+                            formatCodeBlocks(contentDiv);
                             ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
                         }
                     }, speed);
                     return;
                 } else {
-                    bubble.innerHTML = marked.parse(content);
-                    formatCodeBlocks(bubble); // Terapkan pembungkus kode jika memuat history
+                    contentDiv.innerHTML = marked.parse(content);
+                    formatCodeBlocks(contentDiv);
+                    bubble.appendChild(avatar);
+                    bubble.appendChild(contentDiv);
+                    div.appendChild(bubble);
                 }
             }
             
-            if(role === 'ai') bubbleWrap.innerHTML = avatar;
-            bubbleWrap.appendChild(bubble); div.appendChild(bubbleWrap);
-            ui.chatContainer.appendChild(div); ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
+            ui.chatContainer.appendChild(div); 
+            ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
         }
 
+        // --- FILE HANDLING UI (CLEAN PREVIEW) ---
         ui.fileInput.addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
-            if (selectedFiles.length + files.length > 9) {
-                alert("Maksimal 9 file diperbolehkan."); return;
+            if (selectedFiles.length + files.length > 5) {
+                alert("Maximum 5 files allowed per message."); return;
             }
             selectedFiles = [...selectedFiles, ...files];
             renderFilePreviews();
@@ -419,19 +455,17 @@
             selectedFiles.forEach((file, index) => {
                 const isImage = file.type.startsWith('image/');
                 const div = document.createElement('div');
-                div.className = "relative group flex-shrink-0";
+                div.className = "relative group flex-shrink-0 mb-1";
                 
-                let content = '';
                 if (isImage) {
                     const url = URL.createObjectURL(file);
-                    content = `<img src="${url}" class="h-14 w-14 object-cover rounded-lg border border-white/20">`;
+                    div.innerHTML = `<div class="h-14 w-14 rounded-lg border border-border overflow-hidden bg-background"><img src="${url}" class="h-full w-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"></div>`;
                 } else {
-                    content = `<div class="h-14 w-14 flex items-center justify-center bg-violet-600/30 text-violet-400 rounded-lg border border-white/20 text-xs flex-col text-center overflow-hidden p-1"><i class="fa-solid fa-file mb-1 text-lg"></i><span class="truncate w-full">${file.name}</span></div>`;
+                    div.innerHTML = `<div class="h-14 w-14 flex flex-col items-center justify-center bg-background rounded-lg border border-border text-[10px] text-secondary p-1"><i class="fa-regular fa-file-lines mb-1 text-base"></i><span class="truncate w-full text-center">${file.name}</span></div>`;
                 }
                 
-                div.innerHTML = `
-                    ${content}
-                    <button type="button" onclick="removeFile(${index})" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                div.innerHTML += `
+                    <button type="button" onclick="removeFile(${index})" class="absolute -top-1.5 -right-1.5 bg-neutral-700 text-white rounded-full w-4 h-4 flex items-center justify-center text-[9px] opacity-0 group-hover:opacity-100 transition-opacity shadow border border-neutral-600 hover:bg-neutral-600">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 `;
@@ -450,16 +484,18 @@
             renderFilePreviews();
         }
 
+        // --- INPUT UX ---
         function autoResizeTextarea() {
             ui.userInput.style.height = 'auto';
-            ui.userInput.style.height = (ui.userInput.scrollHeight) + 'px';
+            let newHeight = ui.userInput.scrollHeight;
+            ui.userInput.style.height = (newHeight > 200 ? 200 : newHeight) + 'px';
         }
         
         function checkInputState() {
             if(ui.userInput.value.trim() !== '' || selectedFiles.length > 0) {
-                ui.sendBtn.classList.add('text-white', 'bg-violet-600');
+                ui.sendBtn.removeAttribute('disabled');
             } else {
-                ui.sendBtn.classList.remove('text-white', 'bg-violet-600');
+                ui.sendBtn.setAttribute('disabled', 'true');
             }
         }
 
@@ -473,6 +509,7 @@
         });
         ui.userInput.addEventListener('input', () => { autoResizeTextarea(); checkInputState(); });
 
+        // --- SUBMIT REQUEST ---
         ui.chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             if (isGenerating) return;
@@ -496,11 +533,22 @@
             saveHistory('user', question, attachmentsForHistory);
             
             isGenerating = true;
-            ui.sendBtn.disabled = true;
+            ui.sendBtn.setAttribute('disabled', 'true');
+            ui.sendBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin text-sm"></i>';
 
+            // Loading state minimalist
             const loadingDiv = document.createElement('div');
-            loadingDiv.className = "flex gap-4 justify-start max-w-4xl mx-auto w-full animate-fade-in-up";
-            loadingDiv.innerHTML = `<div class="flex gap-4 w-full"><div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-fuchsia-600 flex-shrink-0 flex items-center justify-center shadow-[0_0_15px_rgba(139,92,246,0.4)] border border-white/20 animate-pulse"><i class="fa-solid fa-robot text-white"></i></div><div class="p-5 rounded-2xl rounded-tl-sm bg-black/40 backdrop-blur-md border border-white/10 flex gap-2 items-center h-[60px]"><div class="w-2 h-2 rounded-full bg-violet-400 animate-bounce" style="animation-delay: 0s"></div><div class="w-2 h-2 rounded-full bg-violet-400 animate-bounce" style="animation-delay: 0.2s"></div><div class="w-2 h-2 rounded-full bg-violet-400 animate-bounce" style="animation-delay: 0.4s"></div></div></div>`;
+            loadingDiv.className = "flex w-full max-w-3xl animate-fade-in mb-6 justify-start";
+            loadingDiv.innerHTML = `
+                <div class="flex gap-4">
+                    <div class="w-8 h-8 rounded-full border border-border flex items-center justify-center flex-shrink-0 mt-0.5 bg-background"><i class="fa-solid fa-sparkles text-[11px] text-secondary"></i></div>
+                    <div class="flex items-center gap-1.5 h-9 px-2">
+                        <div class="w-1.5 h-1.5 rounded-full bg-secondary animate-bounce" style="animation-delay: 0s"></div>
+                        <div class="w-1.5 h-1.5 rounded-full bg-secondary animate-bounce" style="animation-delay: 0.15s"></div>
+                        <div class="w-1.5 h-1.5 rounded-full bg-secondary animate-bounce" style="animation-delay: 0.3s"></div>
+                    </div>
+                </div>
+            `;
             ui.chatContainer.appendChild(loadingDiv);
             ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
 
@@ -509,7 +557,7 @@
 
                 if (currentFiles.length > 0) {
                     const formData = new FormData();
-                    formData.append('question', question || "Deskripsikan file/gambar ini");
+                    formData.append('question', question || "Analyze this file.");
                     formData.append('model', ui.modelSelector.value);
                     formData.append('conversationId', currentConvId || genId());
                     formData.append('webSearch', 'true');
@@ -526,6 +574,7 @@
                     });
                 }
 
+                // Call Proxy VPS
                 const response = await fetch(WORKER_URL, fetchOptions);
                 const data = await response.json();
                 
@@ -537,10 +586,11 @@
 
             } catch (error) {
                 ui.chatContainer.removeChild(loadingDiv);
-                appendMsg('ai', "⚠️ **Error:** Gagal terhubung ke API. " + error.message, false);
+                appendMsg('ai', "⚠️ **Connection Error:** Failed to reach proxy server. Make sure the VPS is running and IP is correct.", false);
             } finally {
                 isGenerating = false;
-                ui.sendBtn.disabled = false;
+                ui.sendBtn.innerHTML = '<i class="fa-solid fa-arrow-up text-sm"></i>';
+                checkInputState(); // Re-check incase user typed during generation
             }
         });
 

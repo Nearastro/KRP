@@ -24,7 +24,6 @@
                         border: '#27272a',     /* zinc-800 */
                         primary: '#f4f4f5',    /* zinc-100 */
                         secondary: '#a1a1aa',  /* zinc-400 */
-                        accent: '#e4e4e7',     /* zinc-200 */
                     }
                 } 
             }
@@ -50,7 +49,7 @@
         }
         @keyframes blink { 50% { opacity: 0; } }
         
-        /* Markdown Styling - Clean & Minimalist */
+        /* Markdown Styling - Clean */
         .markdown-body { font-size: 0.95rem; line-height: 1.7; color: #e4e4e7; }
         .markdown-body p { margin-bottom: 1.25rem; }
         .markdown-body p:last-child { margin-bottom: 0; }
@@ -61,7 +60,7 @@
         .markdown-body a { color: #60a5fa; text-decoration: none; }
         .markdown-body a:hover { text-decoration: underline; }
         
-        /* Code Block Styling */
+        /* Code Block */
         .markdown-body code { 
             font-family: ui-monospace, SFMono-Regular, monospace; font-size: 0.85em; 
             padding: 0.2em 0.4em; background: #27272a; color: #f4f4f5; 
@@ -76,7 +75,6 @@
 </head>
 <body class="h-screen flex overflow-hidden antialiased selection:bg-zinc-800 selection:text-white">
 
-    <!-- Sidebar -->
     <aside id="sidebar" class="w-[260px] bg-background border-r border-border flex-shrink-0 flex flex-col transition-transform duration-300 md:relative absolute z-30 h-full -translate-x-full md:translate-x-0">
         <div class="h-14 flex items-center justify-between px-4 py-4">
             <span class="text-base font-semibold tracking-tight text-primary flex items-center gap-2">
@@ -107,10 +105,8 @@
         </div>
     </aside>
 
-    <!-- Overlay Mobile -->
     <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-20 hidden md:hidden transition-opacity"></div>
 
-    <!-- Main Chat Area -->
     <main class="flex-1 flex flex-col h-full relative w-full bg-background">
         
         <header class="h-14 flex items-center justify-between px-4 sticky top-0 z-10 bg-background/90 backdrop-blur-sm border-b border-border/50">
@@ -120,7 +116,6 @@
                 </button>
                 <div class="relative flex items-center">
                     <select id="model-selector" class="appearance-none bg-transparent hover:bg-surface border border-transparent hover:border-border text-sm rounded-lg pl-2 pr-8 py-1.5 outline-none text-primary cursor-pointer transition-colors font-medium">
-                        <!-- Options dipopulasi via JS -->
                     </select>
                     <i data-lucide="chevron-down" class="absolute right-2 text-secondary pointer-events-none w-4 h-4"></i>
                 </div>
@@ -129,7 +124,6 @@
 
         <div id="chat-container" class="flex-1 overflow-y-auto px-4 md:px-0 py-6 space-y-8 pb-32 scroll-smooth flex flex-col items-center">
             
-            <!-- Welcome Screen -->
             <div id="welcome-screen" class="h-full w-full max-w-2xl flex flex-col items-center justify-center text-center mt-8 md:mt-16 transition-opacity duration-500">
                 <div class="w-14 h-14 rounded-2xl bg-surface border border-border flex items-center justify-center mb-6 shadow-sm">
                     <i data-lucide="layers" class="w-7 h-7 text-secondary"></i>
@@ -156,19 +150,14 @@
             </div>
         </div>
 
-        <!-- Input Area -->
         <div class="absolute bottom-0 w-full bg-gradient-to-t from-background via-background to-transparent pt-8 pb-6 px-4 md:px-0 flex justify-center z-10">
             <form id="chat-form" class="w-full max-w-3xl relative">
                 
-                <!-- Unified Input Box -->
                 <div class="relative flex flex-col bg-surface rounded-2xl border border-border shadow-sm transition-all focus-within:border-zinc-600 focus-within:ring-1 focus-within:ring-zinc-600/50">
-                    
-                    <!-- File Preview Area -->
                     <div id="file-preview-container" class="flex gap-2 px-3 pt-3 overflow-x-auto hidden"></div>
                     
                     <textarea id="user-input" rows="1" class="w-full bg-transparent text-primary pt-4 pb-12 px-4 resize-none outline-none max-h-[200px] text-[15px] placeholder-zinc-500 leading-relaxed" placeholder="Ketik pesan ke NearsX..."></textarea>
                     
-                    <!-- Bottom Controls in Input Box -->
                     <div class="absolute bottom-2 left-2 right-2 flex justify-between items-center">
                         <div>
                             <label for="file-upload" class="p-2 text-secondary hover:text-primary hover:bg-zinc-800 rounded-lg cursor-pointer transition-colors flex items-center justify-center" title="Lampirkan File">
@@ -191,7 +180,6 @@
     </main>
 
     <script>
-        // === ROOT VPS SESUAI REQUEST ===
         const WORKER_URL = "http://116.212.73.233:8080/"; 
         
         const MODELS = [
@@ -225,7 +213,7 @@
                 if(m === 'gpt-4o') opt.selected = true;
                 ui.modelSelector.add(opt);
             });
-            lucide.createIcons(); // Init Lucide Icons
+            lucide.createIcons();
             renderHistory();
             if (chatHistory.length > 0) loadConv(chatHistory[0].id);
         }
@@ -290,7 +278,7 @@
             const conv = chatHistory.find(c => c.id === id);
             ui.chatContainer.innerHTML = '';
             ui.welcomeScreen.style.display = 'none';
-            if (conv) conv.messages.forEach(msg => appendMsg(msg.role, msg.content, msg.attachments));
+            if (conv) conv.messages.forEach(msg => appendMsg(msg.role, msg.content, false, msg.attachments));
             renderHistory();
             if(window.innerWidth < 768 && !ui.sidebar.classList.contains('-translate-x-full')) toggleSidebar();
         }
@@ -353,7 +341,6 @@
             lucide.createIcons({ root: container });
         }
 
-        // Render lampiran file di dalam chat history
         function generateAttachmentHTML(attachments) {
             if (!attachments || attachments.length === 0) return '';
             let html = `<div class="flex flex-wrap gap-2 mb-3">`;
@@ -368,8 +355,7 @@
             return html;
         }
 
-        // Fungsi Append Message statis (untuk riwayat)
-        function appendMsg(role, content, attachments = []) {
+        function appendMsg(role, content, isTyping = false, attachments = []) {
             ui.welcomeScreen.style.display = 'none';
             
             const div = document.createElement('div');
@@ -384,6 +370,7 @@
                         <div>${content}</div>
                     </div>
                 `;
+                ui.chatContainer.appendChild(div);
             } else {
                 div.innerHTML = `
                     <div class="text-primary markdown-body w-full max-w-full overflow-hidden flex gap-4">
@@ -393,17 +380,36 @@
                         <div class="flex-1 min-w-0 content-wrapper"></div>
                     </div>
                 `;
+                ui.chatContainer.appendChild(div);
+                lucide.createIcons({ root: div });
+                
                 const contentWrapper = div.querySelector('.content-wrapper');
-                contentWrapper.innerHTML = marked.parse(content);
-                formatCodeBlocks(contentWrapper);
+
+                if (isTyping) {
+                    contentWrapper.classList.add('typing-cursor');
+                    let i = 0;
+                    const speed = content.length > 500 ? 1 : 4; 
+                    const interval = setInterval(() => {
+                        if (i < content.length) {
+                            contentWrapper.innerHTML = marked.parse(content.substring(0, i + 3));
+                            ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight; 
+                            i += 3;
+                        } else {
+                            clearInterval(interval);
+                            contentWrapper.classList.remove('typing-cursor');
+                            contentWrapper.innerHTML = marked.parse(content);
+                            formatCodeBlocks(contentWrapper);
+                            ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
+                        }
+                    }, speed);
+                } else {
+                    contentWrapper.innerHTML = marked.parse(content);
+                    formatCodeBlocks(contentWrapper);
+                }
             }
-            
-            ui.chatContainer.appendChild(div);
-            lucide.createIcons({ root: div });
             ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
         }
 
-        // File handling
         ui.fileInput.addEventListener('change', (e) => {
             const files = Array.from(e.target.files);
             if (selectedFiles.length + files.length > 5) {
@@ -478,7 +484,7 @@
         });
         ui.userInput.addEventListener('input', () => { autoResizeTextarea(); checkInputState(); });
 
-        // --- CORE FETCH DENGAN STREAMING SSE (MENCEGAH ERROR JSON PARSE) ---
+        // --- SISTEM FETCHING LAMA (DIKEMBALIKAN 100% SAMA KAYA REQUEST) TAPI PARSING DIBENERIN ---
         ui.chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             if (isGenerating) return;
@@ -493,39 +499,35 @@
                 url: f.type.startsWith('image/') ? URL.createObjectURL(f) : null
             }));
 
-            // Tampilkan pesan user
-            appendMsg('user', question, attachmentsForHistory);
-            saveHistory('user', question, attachmentsForHistory);
-            
-            // Reset Input
             ui.userInput.value = '';
             ui.userInput.style.height = 'auto';
             clearFiles();
             checkInputState();
             
+            appendMsg('user', question, false, attachmentsForHistory);
+            saveHistory('user', question, attachmentsForHistory);
+            
             isGenerating = true;
             ui.sendBtn.setAttribute('disabled', 'true');
-            // Ganti icon ke loader
             ui.sendBtn.innerHTML = '<i data-lucide="loader-circle" class="w-5 h-5 animate-spin"></i>';
             lucide.createIcons({ root: ui.sendBtn });
 
-            // Buat DOM Element untuk AI
-            const aiDiv = document.createElement('div');
-            aiDiv.className = `flex w-full max-w-3xl mb-6 justify-start`;
-            aiDiv.innerHTML = `
-                <div class="text-primary markdown-body w-full max-w-full overflow-hidden flex gap-4">
-                    <div class="w-8 h-8 rounded-full border border-border flex items-center justify-center flex-shrink-0 mt-0.5 bg-background shadow-sm">
-                        <i data-lucide="hexagon" class="w-4 h-4 text-primary"></i>
+            // Div loading efek titik mantul
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = "flex w-full max-w-3xl mb-6 justify-start";
+            loadingDiv.innerHTML = `
+                <div class="flex gap-4">
+                    <div class="w-8 h-8 rounded-full border border-border flex items-center justify-center flex-shrink-0 mt-0.5 bg-background shadow-sm"><i data-lucide="hexagon" class="w-4 h-4 text-secondary"></i></div>
+                    <div class="flex items-center gap-1.5 h-9 px-2">
+                        <div class="w-1.5 h-1.5 rounded-full bg-secondary animate-bounce" style="animation-delay: 0s"></div>
+                        <div class="w-1.5 h-1.5 rounded-full bg-secondary animate-bounce" style="animation-delay: 0.15s"></div>
+                        <div class="w-1.5 h-1.5 rounded-full bg-secondary animate-bounce" style="animation-delay: 0.3s"></div>
                     </div>
-                    <div class="flex-1 min-w-0 content-wrapper typing-cursor"></div>
                 </div>
             `;
-            ui.chatContainer.appendChild(aiDiv);
-            lucide.createIcons({ root: aiDiv });
-            const contentDiv = aiDiv.querySelector('.content-wrapper');
+            ui.chatContainer.appendChild(loadingDiv);
+            lucide.createIcons({ root: loadingDiv });
             ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
-
-            let aiReply = "";
 
             try {
                 let fetchOptions = { method: 'POST' };
@@ -549,80 +551,56 @@
                     });
                 }
 
-                // Ambil data stream
+                // FETCH PERSIS KAYA KODE AWAL LU
                 const response = await fetch(WORKER_URL, fetchOptions);
+                const rawText = await response.text();
                 
-                if (!response.ok) {
-                    throw new Error(`Server merespon dengan status: ${response.status}`);
-                }
+                ui.chatContainer.removeChild(loadingDiv);
+                
+                let aiReply = "";
 
-                const reader = response.body.getReader();
-                const decoder = new TextDecoder("utf-8");
-                let buffer = "";
-
-                // Looping membaca kepingan stream (chunk)
-                while (true) {
-                    const { done, value } = await reader.read();
-                    if (done) break;
-
-                    buffer += decoder.decode(value, { stream: true });
-                    const lines = buffer.split('\n');
-                    buffer = lines.pop(); // Simpan line yang terpotong di buffer
-
+                // PERBAIKAN LOGIKA PARSING SSE DISINI
+                if (rawText.includes('data:')) {
+                    const lines = rawText.split('\n');
                     for (let line of lines) {
                         line = line.trim();
                         if (line.startsWith('data:')) {
-                            const jsonStr = line.substring(5).trim();
-                            if (jsonStr === '[DONE]') continue;
-                            
+                            const jsonStr = line.replace(/^data:\s*/, '').trim();
+                            if (jsonStr === '[DONE]' || !jsonStr) continue;
                             try {
                                 const parsed = JSON.parse(jsonStr);
-                                // Tangkap nilai text (bisa response/message/text/content tergantung format API)
-                                const token = parsed.response || parsed.message || parsed.text || parsed.content || "";
-                                aiReply += token;
-                                
-                                // Render langsung perlahan
-                                contentDiv.innerHTML = marked.parse(aiReply);
-                                ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
+                                aiReply += (parsed.response || parsed.message || parsed.text || parsed.content || "");
                             } catch (err) {
-                                // Abaikan chunk yang gagal diparsing sementara (menunggu chunk lengkap)
-                                console.warn("Incomplete chunk JSON skipped:", jsonStr);
+                                // Skip baris error secara sunyi, nggak bikin crash `Unexpected token`
                             }
                         }
                     }
-                }
+                } 
                 
-                // Cek sisa buffer jika ada
-                if (buffer.trim().startsWith('data:')) {
-                    const jsonStr = buffer.substring(5).trim();
-                    if (jsonStr !== '[DONE]') {
-                        try {
-                            const parsed = JSON.parse(jsonStr);
-                            aiReply += parsed.response || parsed.message || parsed.text || parsed.content || "";
-                            contentDiv.innerHTML = marked.parse(aiReply);
-                        } catch(e){}
+                // Fallback kalau bukan format data:
+                if (!aiReply) {
+                    try {
+                        const parsed = JSON.parse(rawText);
+                        aiReply = parsed.response || parsed.message || parsed.text || parsed.answer || JSON.stringify(parsed);
+                    } catch (err) {
+                        aiReply = rawText; // kalau plain text biasa
                     }
                 }
 
-                if (!aiReply.trim()) {
-                    aiReply = "⚠️ Respon kosong dari server API.";
-                    contentDiv.innerHTML = aiReply;
-                }
+                if (!aiReply.trim()) aiReply = "⚠️ Respon kosong dari server API.";
+
+                // Eksekusi ngetik otomatis (isTyping = true)
+                appendMsg('ai', aiReply, true);
+                saveHistory('ai', aiReply);
 
             } catch (error) {
-                aiReply = "⚠️ **Koneksi Error:** " + error.message;
-                contentDiv.innerHTML = marked.parse(aiReply);
+                if (ui.chatContainer.contains(loadingDiv)) ui.chatContainer.removeChild(loadingDiv);
+                appendMsg('ai', "⚠️ **Connection Error:** " + error.message, false);
             } finally {
-                // Post-processing setelah stream selesai
-                contentDiv.classList.remove('typing-cursor');
-                formatCodeBlocks(contentDiv);
-                saveHistory('ai', aiReply);
-                
                 isGenerating = false;
                 ui.sendBtn.innerHTML = '<i data-lucide="arrow-up" class="w-5 h-5"></i>';
                 lucide.createIcons({ root: ui.sendBtn });
                 checkInputState();
-                ui.chatContainer.scrollTop = ui.chatContainer.scrollHeight;
             }
         });
 
